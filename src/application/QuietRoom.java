@@ -1,5 +1,6 @@
 package application;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -15,9 +16,13 @@ public class QuietRoom extends GridPane {
 	public QuietRoom () {
 		
 		walkway1 = new Label("WalkWay");
-		walkway2 = new Label("WalkWay");
-		walkway2.setRotate(-90);
+		walkway1.setAlignment(Pos.CENTER);
+		walkway1.setPrefHeight(30);
+		walkway2 = new Label("W\na\nl\nk\nW\na\ny");
+//		walkway2.setRotate(-90);
+		walkway2.setPrefWidth(30);
 		walkway3 = new Label("WalkWay");
+		walkway3.setPrefHeight(30);
 		seat1A = new Button("1A");
 		seat1B = new Button("1B");
 		seat1C = new Button("1C");
