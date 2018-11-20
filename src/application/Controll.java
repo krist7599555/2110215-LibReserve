@@ -77,13 +77,17 @@ public class Controll extends VBox {
 	public Form getForm() {
 		return new Form(zones.getValue(), seats.getValue(), getStudentList());
 	}
+
 	public String[] getStudentList() {
-		return Arrays.asList(students.toArray(new TextField[students.size()]))
-				.stream().map(o -> o.getText()).toArray(String[]::new);
+		return Arrays.asList(students.toArray(new TextField[students.size()])).stream().map(o -> o.getText())
+				.toArray(String[]::new);
 	}
+
 	private void setStudentNeed(int need) {
-		while (students.size() > need) students.remove(students.size() - 1);
-		while (students.size() < need) students.add(new TextField());
+		while (students.size() > need)
+			students.remove(students.size() - 1);
+		while (students.size() < need)
+			students.add(new TextField());
 		VBox box = new VBox();
 		box.getChildren().addAll(students);
 		this.getChildren().set(studentsIdx, box);
