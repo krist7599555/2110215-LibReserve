@@ -14,10 +14,13 @@ public class QuietRoom extends GridPane {
 	private Label walkway1, walkway2, walkway3;
 	
 	public QuietRoom () {
-		
+		/*
+		this.setHalignment(node, HPos.CENTER); // To align horizontally in the cell
+		this.setValignment(node, VPos.CENTER); // To align vertically in the cell
+		*/
 		walkway1 = new Label("WalkWay");
-		walkway1.setAlignment(Pos.CENTER);
 		walkway1.setPrefHeight(30);
+		walkway1.setAlignment(Pos.CENTER);
 		walkway2 = new Label("W\na\nl\nk\nW\na\ny");
 //		walkway2.setRotate(-90);
 		walkway2.setPrefWidth(30);
