@@ -18,6 +18,7 @@ public class Main extends Application {
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		// KT
 	}
 
 	public static void main(String[] args) {
