@@ -16,25 +16,11 @@ public class QuietRoom extends GridPane {
 	private Label walkway1, walkway2, walkway3;
 	
 	public QuietRoom () {
-<<<<<<< HEAD
-		/*
-		this.setHalignment(node, HPos.CENTER); // To align horizontally in the cell
-		this.setValignment(node, VPos.CENTER); // To align vertically in the cell
-		*/
-||||||| merged common ancestors
-		
-=======
->>>>>>> 7e912af6f2209a2634f25c00edb3b90c1117d53b
 		walkway1 = new Label("WalkWay");
 		walkway1.setPrefHeight(30);
-<<<<<<< HEAD
-		walkway1.setAlignment(Pos.CENTER);
-||||||| merged common ancestors
-=======
 		walkway1.setAlignment(Pos.CENTER);
 		this.setHalignment(walkway1, HPos.CENTER);
 		this.setValignment(walkway1, VPos.CENTER);
->>>>>>> 7e912af6f2209a2634f25c00edb3b90c1117d53b
 		walkway2 = new Label("W\na\nl\nk\nW\na\ny");
 		walkway2.setPrefWidth(30);
 		walkway2.setAlignment(Pos.CENTER);
