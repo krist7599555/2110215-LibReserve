@@ -18,7 +18,7 @@ public class Main extends Application {
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		// KT2
+		// KT232
 	}
 
 	public static void main(String[] args) {
