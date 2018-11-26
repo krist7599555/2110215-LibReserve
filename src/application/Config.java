@@ -7,13 +7,16 @@ import java.util.Map;
 class Info {
 	int[] position;
 	int reserveNeed;
+
 	Info(int[] position, int reserveNeed) {
 		this.position = position;
 		this.reserveNeed = reserveNeed;
 	}
+
 	public int[] getPosition() {
 		return position;
 	}
+
 	public int getReserveNeed() {
 		return reserveNeed;
 	}
