@@ -4,6 +4,8 @@ import java.util.Arrays;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -46,7 +48,11 @@ public class Controll extends VBox {
 		super();
 		this.setPadding(new Insets(10));
 		this.setAlignment(Pos.CENTER);
-		this.getChildren().add(new Label("Engineer Library"));
+		this.getChildren().add(new Label("Engineering Library"));
+		
+		// Login Pane
+		this.getChildren().add(new LoginPane());
+		// ---------
 
 		this.getChildren().add(new TextField());
 
@@ -68,6 +74,7 @@ public class Controll extends VBox {
 				});
 
 		this.getChildren().add(this.submitBtn = new Button("submit"));
+		this.submitBtn.setOnAction(new DialogBox());
 		this.submitBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			System.out.println("SUBMIT");
 			System.out.println(getForm());

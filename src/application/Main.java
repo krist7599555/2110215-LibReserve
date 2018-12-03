@@ -10,6 +10,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		GridPane root = new GridPane();
+		root.setPrefHeight(500);
 		QuietRoom quietRoom = new QuietRoom();
 		root.add(quietRoom, 0, 0);
 		root.add(new Map(), 1, 0);
