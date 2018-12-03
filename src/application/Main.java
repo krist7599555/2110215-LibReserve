@@ -14,7 +14,7 @@ public class Main extends Application {
 		QuietRoom quietRoom = new QuietRoom();
 		root.add(quietRoom, 0, 0);
 		root.add(new Map(), 1, 0);
-		root.add(new Controll(), 2, 0);
+		root.add(new ControlPane(), 2, 0);
 		Scene scene = new Scene(root);
 
 		primaryStage.setScene(scene);

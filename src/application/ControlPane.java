@@ -36,25 +36,35 @@ class Form {
 	}
 }
 
-public class Controll extends VBox {
+public class ControlPane extends VBox {
 
 	private ChoiceBox<String> zones = new ChoiceBox<String>(FXCollections.observableArrayList(Config.zones));
 	private ChoiceBox<Integer> seats = new ChoiceBox<Integer>();
 	private ObservableList<TextField> students = FXCollections.observableArrayList();
 	private Button submitBtn;
 	private int studentsIdx;
+	private int loginPaneIdx;
 
-	public Controll() {
+	public int getLoginPaneIdx() {
+		return loginPaneIdx;
+	}
+
+	public ControlPane() {
 		super();
 		this.setPadding(new Insets(10));
 		this.setAlignment(Pos.CENTER);
-		this.getChildren().add(new Label("Engineering Library"));
+		Label title = new Label("Engineering Library");
+		this.getChildren().add(title);
+		title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold");
 		
-		// Login Pane
-		this.getChildren().add(new LoginPane());
-		// ---------
-
-		this.getChildren().add(new TextField());
+		// Login Pane ------------
+		LoginPane loginPane = new LoginPane();
+		this.getChildren().add(loginPane);
+		this.loginPaneIdx = this.getChildren().size();
+//		while (!State.isLogin) {
+//			this.getChildren().set(loginPaneIdx, new Label("Login Successful"));	
+//		}
+		// -----------------------
 
 		HBox select = new HBox();
 		select.getChildren().addAll(zones, seats);
