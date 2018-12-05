@@ -49,6 +49,7 @@ public class QuietRoom extends GridPane {
 	private Label walkwayV, walkwayH, walkwayH2;
 	
 	private Button[][] zone1, zone2, zone3;
+	private Button[][][] zones;
 	
 	public QuietRoom () {
 		super();
@@ -80,6 +81,7 @@ public class QuietRoom extends GridPane {
 		zone3 = ButtonMatrix.toButtonMatrix(new String[][]{
 			{"41", "42", "43", "4D"}
 		});
+		zones = new Button[][][] {zone1, zone2, zone3};
 
 		this.add(walkwayV, 0, 0, 1, 6);
 		ButtonMatrix.paintOnGrid(this, zone1, 1, 0, 1, 1);
@@ -88,15 +90,18 @@ public class QuietRoom extends GridPane {
 		this.add(walkwayH2, 1, 4, 4, 1);
 		ButtonMatrix.paintOnGrid(this, zone3, 1, 5, 1, 1);
 		
-		for (Button btn : ButtonMatrix.toArrayList(zone1)) {
-			btn.setOnAction(e -> {
-				Alert alert = new Alert(AlertType.INFORMATION);
-		        alert.setTitle("PRESS BTN");
-		        alert.setHeaderText("press");
-		        alert.setContentText(btn.getText());
-		        alert.showAndWait();
-				System.out.println(btn.getText());
-			});
+		for (Button[][] zone : zones) {
+			for (Button btn : ButtonMatrix.toArrayList(zone)) {
+				btn.setOnAction(e -> {
+					new HistoryWrapper(btn.getText());
+//				Alert alert = new Alert(AlertType.INFORMATION);
+//		        alert.setTitle("PRESS BTN");
+//		        alert.setHeaderText("press");
+//		        alert.setContentText(btn.getText());
+//		        alert.showAndWait();
+//				System.out.println(btn.getText());
+				});
+			}
 		}
 
 	}

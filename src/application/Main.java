@@ -14,11 +14,12 @@ public class Main extends Application {
 		root.add(quietRoom, 0, 0);
 		root.add(new Map(), 1, 0);
 		root.add(new Controll(), 2, 0);
+//		root.add(new History(), 3, 0);
 		Scene scene = new Scene(root);
 
 		primaryStage.setScene(scene);
+		
 		primaryStage.show();
-		// comment
 	}
 
 	public static void main(String[] args) {

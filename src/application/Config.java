@@ -12,11 +12,9 @@ class Info {
 		this.position = position;
 		this.reserveNeed = reserveNeed;
 	}
-
 	public int[] getPosition() {
 		return position;
 	}
-
 	public int getReserveNeed() {
 		return reserveNeed;
 	}
