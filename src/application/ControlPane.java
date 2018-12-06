@@ -15,14 +15,9 @@ public class ControlPane extends VBox {
 		this.getChildren().add(title);
 		title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold");
 		
-		// Login Pane ------------
 		LoginPane loginPane = new LoginPane();
 		this.getChildren().add(loginPane);
-//		this.loginPaneIdx = this.getChildren().size();
-//		while (!State.isLogin) {
-//			this.getChildren().set(loginPaneIdx, new Label("Login Successful"));	
-//		}
-		
+
 	}
 	
 }

@@ -38,4 +38,8 @@ public class Database {
 		} catch (JSONException e) {}
 		return res;
 	}
+	
+	public static void main(String[] args) {
+		System.out.println("HELLO");
+	}
 }
