@@ -13,7 +13,7 @@ public class HistoryWrapper extends Stage {
 		VBox root = new VBox(5);
 		root.setPadding(new Insets(10, 10, 10, 10));
 		root.setAlignment(Pos.CENTER);
-		root.getChildren().addAll(new Label(position), new History());
+		root.getChildren().addAll(new Label(position), new History(position));
 		Scene scene = new Scene(root);
 		this.setScene(scene);
 		this.show();

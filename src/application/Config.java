@@ -22,6 +22,7 @@ class Info {
 
 public class Config {
 	public static final String[] zones = { "A", "B", "C", "D", "E" };
+	
 	public static final Map<String, Info> seats = Collections.unmodifiableMap(new HashMap<String, Info>() {
 		private static final long serialVersionUID = 1L;
 		{

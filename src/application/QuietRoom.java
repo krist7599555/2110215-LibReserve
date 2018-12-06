@@ -6,8 +6,6 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -94,12 +92,6 @@ public class QuietRoom extends GridPane {
 			for (Button btn : ButtonMatrix.toArrayList(zone)) {
 				btn.setOnAction(e -> {
 					new HistoryWrapper(btn.getText());
-//				Alert alert = new Alert(AlertType.INFORMATION);
-//		        alert.setTitle("PRESS BTN");
-//		        alert.setHeaderText("press");
-//		        alert.setContentText(btn.getText());
-//		        alert.showAndWait();
-//				System.out.println(btn.getText());
 				});
 			}
 		}

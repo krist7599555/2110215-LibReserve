@@ -199,7 +199,8 @@ public class LightningSimulator extends Application {
             return (LightningEvent) super.copyFor(newSource, newTarget);
         }
 
-        @Override
+        @SuppressWarnings("unchecked")
+		@Override
         public EventType<? extends LightningEvent> getEventType() {
             return (EventType<? extends LightningEvent>) super.getEventType();
         }
