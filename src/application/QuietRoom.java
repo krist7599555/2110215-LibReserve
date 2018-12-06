@@ -1,7 +1,9 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import database.Table;
 import history.HistoryWrapper;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -10,6 +12,13 @@ import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+
+import java.util.Iterator;
+import java.util.Map;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 class ButtonMatrix {
 	static public Button[][] toButtonMatrix(final String[][] str) {
@@ -23,6 +32,7 @@ class ButtonMatrix {
 		}
 		return res;
 	}
+
 	static public void paintOnGrid(GridPane grid, Button[][] btn, int startcol, int startrow, int szcol, int szrow) {
 		int n1 = btn.length;
 		int n2 = n1 == 0 ? 0 : btn[0].length;
@@ -32,6 +42,7 @@ class ButtonMatrix {
 			}
 		}
 	}
+
 	static public <T> ArrayList<T> toArrayList(T[][] rs) {
 		ArrayList<T> res = new ArrayList<T>();
 		for (T[] ls : rs) {
@@ -43,63 +54,59 @@ class ButtonMatrix {
 	}
 };
 
-public class QuietRoom extends GridPane {
-
-//	private Label walkwayV, walkwayH, walkwayH2;
-//	
-//	private Button[][] zone1, zone2, zone3;
-//	private Button[][][] zones;
+public class QuietRoom extends VBox {
 	
-	public QuietRoom () {
+	private GridPane grid;
+	private Map<String, Button> btns;
+	private HistoryWrapper activePopup;
+
+	public QuietRoom() {
+		this("B");
+	}
+	public QuietRoom(String zone) {
 		super();
-		this.setPadding(new Insets(10));
-		
-		
-		
-//		walkwayH = new Label("WalkWay");
-//		walkwayH.setAlignment(Pos.CENTER);
-//		walkwayH.setPrefHeight(30);
-//		GridPane.setHalignment(walkwayH, HPos.CENTER);
-//		GridPane.setValignment(walkwayH, VPos.CENTER);
-//		walkwayH2 = new Label("WalkWay");
-//		walkwayH2.setAlignment(Pos.CENTER);
-//		walkwayH2.setPrefHeight(30);
-//		GridPane.setHalignment(walkwayH2, HPos.CENTER);
-//		GridPane.setValignment(walkwayH2, VPos.CENTER);
-//		walkwayV = new Label("W\na\nl\nk\nW\na\ny");
-//		walkwayV.setPrefWidth(30);
-//		walkwayV.setAlignment(Pos.CENTER);
-//	
-//		GridPane.setHalignment(walkwayH, HPos.CENTER);
-//		GridPane.setValignment(walkwayH, VPos.CENTER);
-//		
-//		zone1 = ButtonMatrix.toButtonMatrix(new String[][]{
-//			{"A1", "A2", "A3", "A4"}
-//		});
-//		zone2 = ButtonMatrix.toButtonMatrix(new String[][]{
-//			{"2A", "2B"},
-//			{"3A", "3B"},
-//		});
-//		zone3 = ButtonMatrix.toButtonMatrix(new String[][]{
-//			{"41", "42", "43", "4D"}
-//		});
-//		zones = new Button[][][] {zone1, zone2, zone3};
+		this.updateZone(zone);
+	}
 
-//		this.add(walkwayV, 0, 0, 1, 6);
-//		ButtonMatrix.paintOnGrid(this, zone1, 1, 0, 1, 1);
-//		this.add(walkwayH, 1, 1, 4, 1);
-//		ButtonMatrix.paintOnGrid(this, zone2, 1, 2, 1, 1);
-//		this.add(walkwayH2, 1, 4, 4, 1);
-//		ButtonMatrix.paintOnGrid(this, zone3, 1, 5, 1, 1);
-//		
-//		for (Button[][] zone : zones) {
-//			for (Button btn : ButtonMatrix.toArrayList(zone)) {
-//				btn.setOnAction(e -> {
-//					new HistoryWrapper(btn.getText());
-//				});
-//			}
-//		}
+	public void updateZone(String zone) {
+		
+		grid = new GridPane();		
+		btns = new HashMap<String, Button>();
+		
+		grid.setPadding(new Insets(10));
+		
+		try {
+			JSONObject detail = Table.getZone(zone);
 
+			int sr = detail.getInt("startrow");
+			int sc = detail.getInt("startcol");
+			int zr = detail.getInt("sizerow");
+			int zc = detail.getInt("sizecol");
+			
+//			String nm = detail.getString("name");
+			
+			ArrayList<ArrayList<String>> mat = Table.getSeats(zone);
+			
+			for (int i = 0; i < mat.size(); ++i) {
+				for (int j = 0; j < mat.get(i).size(); ++j) {
+					String str = mat.get(i).get(j);
+					if (str.equals("")) continue;
+					Button btn = new Button(str);
+					btn.setPrefSize(45, 30);
+					grid.add(btn, sr + j * zr, sc + i * zc, zr, zc);
+					btns.put(str, btn);
+					btn.setOnAction(e -> {
+						if (activePopup != null) {
+							activePopup.close();
+						}
+						activePopup = new HistoryWrapper(btn.getText());
+					});
+				}
+			}
+		} catch (JSONException e) {}
+		
+		this.getChildren().clear();
+		this.getChildren().addAll(new Label("Hello"), grid);
 	}
 
 }
