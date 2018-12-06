@@ -4,11 +4,8 @@ import java.util.Arrays;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -34,7 +31,7 @@ class Form {
 	}
 }
 
-public class Controll extends VBox {
+public class ReservePane extends VBox {
 
 	private ChoiceBox<String> zones = new ChoiceBox<String>(FXCollections.observableArrayList(Config.zones));
 	private ChoiceBox<Integer> seats = new ChoiceBox<Integer>();
@@ -42,13 +39,7 @@ public class Controll extends VBox {
 	private Button submitBtn;
 	private int studentsIdx;
 
-	public Controll() {
-		super();
-		this.setPadding(new Insets(10));
-		this.setAlignment(Pos.CENTER);
-		this.getChildren().add(new Label("Engineer Library"));
-
-		this.getChildren().add(new TextField());
+	public ReservePane() {
 
 		HBox select = new HBox();
 		select.getChildren().addAll(zones, seats);
@@ -57,21 +48,30 @@ public class Controll extends VBox {
 		this.studentsIdx = this.getChildren().size();
 		this.getChildren().add(new VBox());
 
-		zones.getSelectionModel().selectedItemProperty()
-				.addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-					this.seats.getItems().clear();
-					final Info info = Config.seats.get(newValue);
-					for (Integer i : info.getPosition()) {
-						this.seats.getItems().add(i);
-					}
-					setStudentNeed(info.getReserveNeed());
-				});
+		zones.getSelectionModel().selectedItemProperty().addListener(
+				(ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+			this.seats.getItems().clear();
+			final Info info = Config.seats.get(newValue);
+			for (Integer i : info.getPosition()) {
+				this.seats.getItems().add(i);
+			}
+			setStudentNeed(info.getReserveNeed());
+		});
 
 		this.getChildren().add(this.submitBtn = new Button("submit"));
+		this.submitBtn.setOnAction(new DialogBox());
 		this.submitBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			System.out.println("SUBMIT");
 			System.out.println(getForm());
 		});
+	}
+	
+	public void initilize() {
+		
+	}
+	
+	public void clear() {
+		this.getChildren().clear();
 	}
 
 	public Form getForm() {
