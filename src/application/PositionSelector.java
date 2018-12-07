@@ -16,9 +16,9 @@ import javafx.scene.layout.VBox;
 public class PositionSelector extends VBox {
 	
 	String path;
-	
 	HBox navigate;
 	TimePicker timePicker;
+	HBox floorSelector;
 	ObservableList<? extends Node> navigatelist;
 	
 	public PositionSelector(String path) {
@@ -30,11 +30,18 @@ public class PositionSelector extends VBox {
 		super(20);
 		this.path = "/root";
 		this.setAlignment(Pos.TOP_CENTER);
-		this.setPrefSize(700, 500);
+		this.setPrefSize(700, 600);
 
 		navigate = new HBox();
 		navigate.setPadding(new Insets(15, 20, 15, 20));
 		navigate.setAlignment(Pos.CENTER_LEFT);
+		
+		floorSelector = new HBox(10);
+		floorSelector.setPrefWidth(700);
+		floorSelector.setAlignment(Pos.CENTER);
+		Button fl1btn = new Button("Floor 1");
+		Button fl2btn = new Button("Floor 2");
+		floorSelector.getChildren().addAll(fl1btn, fl2btn);
 		
 		timePicker = new TimePicker(true);
 		timePicker.addEventHandler(LibReserveEvent.INPUT_CHANGE, e -> {
@@ -44,6 +51,7 @@ public class PositionSelector extends VBox {
 		
 		this.getChildren().add(navigate);
 		this.getChildren().add(currentMiddleBox = new VBox());
+		this.getChildren().add(floorSelector);
 		this.getChildren().add(timePicker);
 		
 		this.setNavigate("");
@@ -96,17 +104,18 @@ public class PositionSelector extends VBox {
 		hb.setAlignment(Pos.CENTER);
 		this.getChildren().set(1, hb);
 		
-		timePicker.setOpacity(level == 2 ? 0 : 1);	
+		floorSelector.setOpacity(level == 2 ? 0 : 1);
+		timePicker.setOpacity(level == 2 ? 0 : 1);
 	}
 	VBox currentMiddleBox;
 	private VBox getFloor() {
 		FirstFl floor1 = new FirstFl();
-//		SecondFl floor2 = new SecondFl();
-		floor1.addEventHandler(LibReserveEvent.SELECTED, e -> {
+		SecondFl floor2 = new SecondFl();
+		floor2.addEventHandler(LibReserveEvent.SELECTED, e -> {
 			String zone = (String) e.getParam();
 			this.setNavigate(zone);
 		});
-		return new VBox(floor1);
+		return new VBox(floor2);
 	}
 	private VBox getZone(String zone) {
 		return new VBox(new QuietRoom(zone) {
