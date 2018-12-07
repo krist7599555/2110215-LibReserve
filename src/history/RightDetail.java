@@ -21,8 +21,8 @@ class RightDetail extends VBox {
 		this.log = log;
 
 		this.setAlignment(Pos.CENTER);
-		this.setPrefWidth(500);
-		this.setMinHeight(500);
+//		this.setPrefWidth(500);
+//		this.setMinHeight(500);
 		this.getStyleClass().addAll("zone-region");
 		this.getChildren().add(new Label(log.getUser() + " (" + log.getPosition() + ")"));
 		this.getChildren().add(new Label(log.getStartTime() + "-" + log.getEndTime().substring(log.getEndTime().length() - 5)));

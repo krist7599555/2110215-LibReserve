@@ -36,11 +36,9 @@ public class QuietRoom extends VBox {
 		grid = new GridPane();		
 		btns = new HashMap<String, Button>();
 		
-		grid.setPadding(new Insets(10));
+//		grid.setPadding(new Insets(10));
 		grid.setHgap(1);
 		grid.setVgap(3);
-		grid.setMinHeight(500);
-		grid.setMinWidth(300);
 		grid.setAlignment(Pos.CENTER);
 		
 		try {

@@ -44,7 +44,7 @@ public class TimePicker extends HBox {
 		slider.setLowValue(this.lowTime);
 		slider.setHighValue(this.highTime);
 		
-		slider.setPrefSize(800, 200);
+		slider.setPrefSize(350, 100);
 		
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);

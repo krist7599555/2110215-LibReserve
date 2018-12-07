@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 public class PositionSelector extends VBox {
@@ -17,7 +18,6 @@ public class PositionSelector extends VBox {
 	String path;
 	
 	HBox navigate;
-	VBox floors;
 	TimePicker timePicker;
 	ObservableList<? extends Node> navigatelist;
 	
@@ -27,15 +27,15 @@ public class PositionSelector extends VBox {
 	}
 	
 	public PositionSelector() {
-		super();
+		super(20);
 		this.path = "/root";
-		this.setAlignment(Pos.CENTER);
-		this.setPrefSize(1000, 700);
-		floors = new VBox(new Label("loading.."));
-		floors.setAlignment(Pos.CENTER);
+		this.setAlignment(Pos.TOP_CENTER);
+		this.setPrefSize(700, 500);
+
 		navigate = new HBox();
-		navigate.setPadding(new Insets(40));
+		navigate.setPadding(new Insets(15, 20, 15, 20));
 		navigate.setAlignment(Pos.CENTER_LEFT);
+		
 		timePicker = new TimePicker(true);
 		timePicker.addEventHandler(LibReserveEvent.INPUT_CHANGE, e -> {
 			TimePicker tp = (TimePicker) e.getParam();
@@ -43,7 +43,7 @@ public class PositionSelector extends VBox {
 		});
 		
 		this.getChildren().add(navigate);
-		this.getChildren().add(floors);
+		this.getChildren().add(currentMiddleBox = new VBox());
 		this.getChildren().add(timePicker);
 		
 		this.setNavigate("");
@@ -73,7 +73,7 @@ public class PositionSelector extends VBox {
 			root.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 				this.setNavigate("");
 			});
-			this.getChildren().set(dest, getFloor());
+			currentMiddleBox = getFloor();
 		}
 		if (level >= 1) {
 			String zone = nav.substring(0, 1);
@@ -83,18 +83,25 @@ public class PositionSelector extends VBox {
 			zoneLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 				this.setNavigate(zone);
 			});
-			this.getChildren().set(dest, getZone(zone));
+			currentMiddleBox = getZone(zone);
 		}
 		if (level >= 2) {
 			navigate.getChildren().add(new Label(" / "));
 			navigate.getChildren().add(new Label(nav));
-			this.getChildren().set(dest, getTable(nav));
+			currentMiddleBox = getTable(nav);
 		}
+
+		HBox hb = new HBox(currentMiddleBox);
+		hb.setPrefSize(700, 350);
+		hb.setAlignment(Pos.CENTER);
+		this.getChildren().set(1, hb);
 		
 		timePicker.setOpacity(level == 2 ? 0 : 1);	
 	}
+	VBox currentMiddleBox;
 	private VBox getFloor() {
 		FirstFl floor1 = new FirstFl();
+//		SecondFl floor2 = new SecondFl();
 		floor1.addEventHandler(LibReserveEvent.SELECTED, e -> {
 			String zone = (String) e.getParam();
 			this.setNavigate(zone);
