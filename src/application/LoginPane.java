@@ -1,5 +1,6 @@
 package application;
 
+import database.Config;
 import database.Store;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
@@ -19,6 +20,9 @@ import javafx.scene.text.Text;
 public class LoginPane extends GridPane {
 
 	private String username, password;
+	private TextField userTextField;
+	private PasswordField pwBox;
+	
 
 	public LoginPane() {
 		this.setAlignment(Pos.CENTER);
@@ -27,6 +31,11 @@ public class LoginPane extends GridPane {
 		this.setPadding(new Insets(25, 25, 25, 25));
 		this.setPrefWidth(300);
 		initilize();
+		if (Config.AUTO_LOGIN) {
+			userTextField.setText("1");
+			pwBox.setText("1");
+			tryLogin();
+		}
 	}
 
 	private void initilize() {
@@ -39,14 +48,14 @@ public class LoginPane extends GridPane {
 		Label userName = new Label("User Name:");
 		this.add(userName, 0, 1);
 
-		TextField userTextField = new TextField();
+		userTextField = new TextField();
 		userTextField.setPromptText("Enter Your Student ID");
 		this.add(userTextField, 1, 1);
 
 		Label pw = new Label("Password:");
 		this.add(pw, 0, 2);
 
-		PasswordField pwBox = new PasswordField();
+		pwBox = new PasswordField();
 		this.add(pwBox, 1, 2);
 		pwBox.setPromptText("8 - 16 characters");
 
@@ -63,68 +72,43 @@ public class LoginPane extends GridPane {
 
 		pwBox.setOnKeyPressed(ke -> {
 			if (ke.getCode() == KeyCode.ENTER) {
-				userTextField.setDisable(true);
-				pwBox.setDisable(true);
-				username = userTextField.getText();
-				password = pwBox.getText();
-				boolean isPass;
-				if ((username.equals("1") && password.equals("1"))) {
-					isPass = true;
-					username = "Admin";
-				} else {
-					isPass = Store.login(username, password);
-				}
-				if (isPass) {
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Login Successful!");
-					alert.setHeaderText("Login Successful!");
-					alert.setContentText("Welcome, " + username + ".");
-					alert.showAndWait();
-					loginHandle();
-				} else {
-					Alert alert = new Alert(AlertType.ERROR);
-					alert.setTitle("Wrong Username or Password!");
-					alert.setHeaderText("Wrong Username or Password!");
-					alert.setContentText("Please try again.");
-					alert.showAndWait();
-					userTextField.setDisable(false);
-					pwBox.setDisable(false);
-				}
+				tryLogin();
 			}
-
 		});
-
 		signinBtn.addEventHandler(ActionEvent.ANY, e -> {
-
-			userTextField.setDisable(true);
-			pwBox.setDisable(true);
-			username = userTextField.getText();
-			password = pwBox.getText();
-
-			if (Store.login(username, password)) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Login Successful!");
-				alert.setHeaderText("Login Successful!");
-				alert.setContentText("Welcome, " + username + ".");
-				alert.showAndWait();
-				loginHandle();
-			} else {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Wrong Username or Password!");
-				alert.setHeaderText("Wrong Username or Password!");
-				alert.setContentText("Please try again.");
-				alert.showAndWait();
-				userTextField.setDisable(false);
-				pwBox.setDisable(false);
-
-			}
+			tryLogin();
 		});
-
 		clearBtn.addEventHandler(ActionEvent.ANY, e -> {
 			userTextField.setText("");
 			pwBox.setText("");
 		});
 
+	}
+	
+	private boolean tryLogin() {
+		userTextField.setDisable(true);
+		pwBox.setDisable(true);
+		username = userTextField.getText();
+		password = pwBox.getText();
+
+		if (Store.login(username, password)) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Login Successful!");
+			alert.setHeaderText("Login Successful!");
+			alert.setContentText("Welcome, " + username + ".");
+			alert.showAndWait();
+			loginHandle();
+			return true;
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Wrong Username or Password!");
+			alert.setHeaderText("Wrong Username or Password!");
+			alert.setContentText("Please try again.");
+			alert.showAndWait();
+			userTextField.setDisable(false);
+			pwBox.setDisable(false);
+			return false;
+		}
 	}
 
 	private void loginHandle() {

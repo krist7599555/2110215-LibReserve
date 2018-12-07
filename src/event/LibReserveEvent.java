@@ -26,6 +26,7 @@ public class LibReserveEvent extends Event {
 	public static final EventType<LibReserveEvent> CUSTOM_EVENT_TYPE = new EventType<LibReserveEvent>(Event.ANY);
 	public static final EventType<LibReserveEvent> DELETE_LOG = new EventType<LibReserveEvent>(CUSTOM_EVENT_TYPE, "DeleteLog");
 	public static final EventType<LibReserveEvent> INPUT_CHANGE = new EventType<LibReserveEvent>(CUSTOM_EVENT_TYPE, "InputChange");
+	public static final EventType<LibReserveEvent> SELECTED = new EventType<LibReserveEvent>(CUSTOM_EVENT_TYPE, "Selected");
 	
 	public Object getParam() {
 		return param;

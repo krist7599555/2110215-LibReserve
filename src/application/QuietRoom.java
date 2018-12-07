@@ -4,14 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import database.Table;
-import event.LibReserveEvent;
-import history.HistoryWrapper;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -23,14 +18,10 @@ import org.json.JSONObject;
 
 public class QuietRoom extends VBox {
 	
-	private String name = "-- None --";
 	private JSONObject detail;
 	
 	private GridPane grid;
 	private Map<String, Button> btns;
-	private HistoryWrapper activePopup;
-	private TimePicker timePicker;
-	private Label label;
 
 	public QuietRoom() {
 		this("A");
@@ -56,12 +47,10 @@ public class QuietRoom extends VBox {
 			
 			detail = Table.getZone(zone);
 
-			int sr = 0; // detail.getInt("startrow");
-			int sc = 0; // detail.getInt("startcol");
+			int sr = 0;
+			int sc = 0;
 			int zr = detail.getInt("sizerow");
 			int zc = detail.getInt("sizecol");
-			
-			name = detail.getString("name");
 	
 			ArrayList<ArrayList<String>> mat = Table.getSeats(zone);
 			System.out.println(mat);
@@ -76,11 +65,8 @@ public class QuietRoom extends VBox {
 						nd = btn = new Button(str);
 						btn.getStyleClass().addAll("desk-btn");
 						btn.getStyleClass().addAll("is-danger");
-						btn.setOnAction(e -> {
-							if (activePopup != null) {
-								activePopup.close();
-							}
-							activePopup = new HistoryWrapper(btn.getText());
+						btn.setOnMouseClicked(e -> {
+							this.handle(btn);
 						});
 						btns.put(str, btn);
 					}
@@ -92,16 +78,13 @@ public class QuietRoom extends VBox {
 			e.printStackTrace();
 		}
 		
-		this.label = new Label(name);
-		this.timePicker = new TimePicker();
-		this.timePicker.addEventHandler(LibReserveEvent.INPUT_CHANGE, e -> {
-			TimePicker tp = (TimePicker) e.getParam();
-			this.label.setText(name + ": " + tp.highLabel.getText() + "-" + tp.lowLabel.getText());
-		});
-		
 		this.setAlignment(Pos.CENTER);
 		this.getChildren().clear();
-		this.getChildren().addAll(this.label, grid, this.timePicker);
+		this.getChildren().addAll(grid);
+	}
+	
+	void handle(Button btn) {
+		System.out.println("HANDEL: " + btn.getText());
 	}
 
 }

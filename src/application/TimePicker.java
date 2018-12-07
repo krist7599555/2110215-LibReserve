@@ -1,24 +1,19 @@
 package application;
 
-import java.util.concurrent.TimeUnit;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.util.StringConverter;
-
-import javafx.scene.control.Control;
 import org.controlsfx.control.RangeSlider;
 
 import event.LibReserveEvent;
 
-public class TimePicker extends VBox {
+public class TimePicker extends HBox {
 
 	long lowTime, highTime;
 	Label lowLabel, highLabel;
+	RangeSlider slider;
 
 	static String minute2str(long l) {
 		return String.format("%02d:%02d", l / 60, l % 60);
@@ -28,17 +23,28 @@ public class TimePicker extends VBox {
 		return Math.round(l / 30) * 30;
 	}
 
+	public TimePicker(boolean showLabel) {
+		this();
+		if (showLabel) {
+			this.getChildren().clear();
+			lowLabel.getStyleClass().add("time-picker-label");
+			highLabel.getStyleClass().add("time-picker-label");
+			this.getChildren().addAll(lowLabel, slider, highLabel);
+		}
+	}
 	public TimePicker() {
-		this.setMinHeight(100);
-		
+		super();
+		this.setAlignment(Pos.CENTER);
 		this.lowTime = roundMinute(780);
 		this.highTime = roundMinute(850);
 		this.lowLabel = new Label(minute2str(lowTime));
 		this.highLabel = new Label(minute2str(highTime));
-		RangeSlider slider = new RangeSlider(480, 1200, lowTime, highTime);
+		slider = new RangeSlider(480, 1200, lowTime, highTime);
 		slider.setPadding(new Insets(15));
 		slider.setLowValue(this.lowTime);
 		slider.setHighValue(this.highTime);
+		
+		slider.setPrefSize(800, 200);
 		
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);

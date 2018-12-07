@@ -13,11 +13,10 @@ public class ControlPane extends VBox {
 		this.setAlignment(Pos.CENTER);
 		Label title = new Label("Engineering Library");
 		this.getChildren().add(title);
-		title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold");
+		title.setStyle("-fx-font-size: 23px; -fx-font-weight: bold");
 		
 		LoginPane loginPane = new LoginPane();
 		this.getChildren().add(loginPane);
-
 	}
 	
 }

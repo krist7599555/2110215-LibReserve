@@ -8,7 +8,7 @@ public class Store {
 	private static String _username = null;
 
 	public static boolean login(String username, String password) {
-		if (LoginRequest.login(username, password) || (username.equals("1") && password.equals("1"))) {
+		if ((username.equals("1") && password.equals("1")) || LoginRequest.login(username, password)) {
 			Store._username = username;
 			return setLogin(true);
 		} else {

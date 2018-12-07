@@ -1,5 +1,6 @@
 package application;
 
+import database.Config;
 import database.Pwd;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -11,10 +12,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		GridPane root = new GridPane();
-		root.setPrefHeight(200);
-		
-		root.add(new QuietRoom(), 0, 0);
-//		root.add(new Map(), 1, 0);
+		root.add(new PositionSelector(Config.STARTER_PATH), 0, 0);
 		root.add(new ControlPane(), 2, 0);
 		
 		Scene scene = new Scene(root);

@@ -1,55 +1,59 @@
 package application;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import javafx.application.Application;
+import database.Pwd;
+import event.LibReserveEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
-public class FirstFl extends Application {
+public class FirstFl extends Pane {
 
 	Map<String, Button> btns;
 
-	@Override
-	public void start(Stage primaryStage) {
-		Pane root = new Pane();
-		root.setPrefSize(1000, 500);
+	public FirstFl() {
+		this.setPrefSize(1000, 500);
 
 		Button x1 = new Button("X");
 		x1.setPrefSize(45, 60);
 		x1.setDisable(true);
 		x1.setLayoutX(540);
 	    x1.setLayoutY(0);
+	    x1.getStyleClass().addAll("zone-region", "is-disabled");
 	    
 	    Button x2 = new Button("--X--");
 	    x2.setPrefSize(225, 390);
 	    x2.setDisable(true);
 	    x2.setLayoutX(775);
 		x2.setLayoutY(0);
+		x2.getStyleClass().addAll("zone-region", "is-disabled");
 		
 		Button ladder = new Button("Ladder");
 	    ladder.setPrefSize(90, 115);
 	    ladder.setDisable(true);
 	    ladder.setLayoutX(650);
 		ladder.setLayoutY(385);
+		ladder.getStyleClass().addAll("zone-region", "is-disabled");
 		
 	    Label EE = new Label("Entrance/\nExit");
 	    EE.setAlignment(Pos.CENTER);
 	    EE.setPrefSize(70, 60);
 	    EE.setLayoutX(585);
 	    EE.setLayoutY(0);
+	    EE.getStyleClass().addAll("zone-region", "is-disabled");
 	    
 	    Button libr = new Button("Librarian Room");
 	    libr.setPrefSize(120, 335);
 	    libr.setDisable(true);
 	    libr.setLayoutX(655);
 	    libr.setLayoutY(0);
+	    libr.getStyleClass().addAll("zone-region", "is-disabled");
 	    
 	    Button zoneA = new Button("A");
 	    zoneA.setPrefSize(395, 265);
@@ -93,25 +97,25 @@ public class FirstFl extends Application {
 	    Group group = new Group(enthbooks);
 	    
 	    labelPane.getChildren().add(group);
-	    
-	    root.getChildren().addAll(x1, x2, ladder, libr, zoneA, zoneB, zoneC, zoneD, zoneE, zoneF, EE, labelPane);
-	    
-		Scene scene = new Scene(root, 1000, 500);
-		
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Library 1st Fl.");
-		primaryStage.show();
 
+	    this.getChildren().addAll(x1, x2, ladder, libr, zoneA, zoneB, zoneC, zoneD, zoneE, zoneF, EE, labelPane);
+	    this.getStylesheets().add(Pwd.file + "/application/style.css");
+	   
+		btns = new HashMap<>();
 		btns.put("A", zoneA);
 		btns.put("B", zoneB);
 		btns.put("C", zoneC);
 		btns.put("D", zoneD);
 		btns.put("E", zoneE);
 		btns.put("F", zoneF);
+		for (var i : btns.entrySet()) {
+			Button btn = i.getValue();
+			btn.getStyleClass().add("zone-region");
+			btn.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
+				this.fireEvent(new LibReserveEvent(LibReserveEvent.SELECTED, i.getKey()));
+			});
+		}
 
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
 }

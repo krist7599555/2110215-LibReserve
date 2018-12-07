@@ -52,6 +52,9 @@ public class Log {
 	public Log(String user, String zone, Integer seat) {
 		this(user, zone, seat, now(), now(), now());
 	}
+	public static Log NONE() {
+		return new Log("Mr. Null Pointer", "NO ZONE", -1);
+	}
 
 	public Log(String user, String zone, Integer seat, String startTime, String endTime, String reserveTime) {
 		this.user = user;
