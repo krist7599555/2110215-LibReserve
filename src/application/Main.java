@@ -13,8 +13,9 @@ public class Main extends Application {
 		GridPane root = new GridPane();
 		root.setPrefHeight(200);
 		
-		root.add(new QuietRoom(), 0, 0);
+//		root.add(new QuietRoom(), 0, 0);
 //		root.add(new Map(), 1, 0);
+		root.add(new SecondFl(), 1, 0);
 		root.add(new ControlPane(), 2, 0);
 		
 		Scene scene = new Scene(root);

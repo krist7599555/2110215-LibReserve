@@ -1,92 +1,54 @@
 package application;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import javafx.application.Application;
+//import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Scene;
+//import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import javafx.scene.text.TextAlignment;
+//import javafx.stage.Stage;
 
-public class FirstFl extends Application {
+public class FirstFl extends Pane {
 
-	Map<String, Button> btns;
+	Map<String, RegionButton> btns;
 
-	@Override
-	public void start(Stage primaryStage) {
-		Pane root = new Pane();
-		root.setPrefSize(1000, 500);
-
-		Button x1 = new Button("X");
-		x1.setPrefSize(45, 60);
-		x1.setDisable(true);
-		x1.setLayoutX(540);
-	    x1.setLayoutY(0);
-	    
-	    Button x2 = new Button("--X--");
-	    x2.setPrefSize(225, 390);
-	    x2.setDisable(true);
-	    x2.setLayoutX(775);
-		x2.setLayoutY(0);
+	public FirstFl() {
 		
-		Button ladder = new Button("Ladder");
-	    ladder.setPrefSize(90, 115);
-	    ladder.setDisable(true);
-	    ladder.setLayoutX(650);
-		ladder.setLayoutY(385);
-		
-	    Label EE = new Label("Entrance/\nExit");
+		this.setPrefSize(500, 250);
+
+		RegionButton x1 = new RegionButton("X", 22.5, 30, 270, 0, true);
+		RegionButton x2 = new RegionButton("--X--", 112.5, 195, 387.5, 0, true);
+		RegionButton ladder = new RegionButton("Lad\nder", 45, 57.5, 325, 192.5, true);
+		ladder.setTextAlignment(TextAlignment.CENTER);
+		RegionButton libr = new RegionButton("", 60, 167.5, 327.5, 0, true);
+        Label label = new Label("Libraian Room");
+        label.setRotate(-90);
+        libr.setGraphic(new Group(label));
+		RegionButton zoneA = new RegionButton("A", 197.5, 132.5, 95, 50);
+		RegionButton zoneB = new RegionButton("B", 200, 30, 70, 0);
+		RegionButton zoneC = new RegionButton("C", 200, 42.5, 125, 207.5);
+		RegionButton zoneD = new RegionButton("D", 100, 50, 25, 200);
+		RegionButton zoneE = new RegionButton("E", 130, 30, 370, 220);
+		RegionButton zoneF = new RegionButton("F", 50, 150, 25, 50);
+
+	    Label EE = new Label("Exit");
 	    EE.setAlignment(Pos.CENTER);
-	    EE.setPrefSize(70, 60);
-	    EE.setLayoutX(585);
+	    EE.setPrefSize(35, 30);
+	    EE.setLayoutX(292.5);
 	    EE.setLayoutY(0);
-	    
-	    Button libr = new Button("Librarian Room");
-	    libr.setPrefSize(120, 335);
-	    libr.setDisable(true);
-	    libr.setLayoutX(655);
-	    libr.setLayoutY(0);
-	    
-	    Button zoneA = new Button("A");
-	    zoneA.setPrefSize(395, 265);
-	    zoneA.setLayoutX(190);
-	    zoneA.setLayoutY(100);
-	    
-	    Button zoneB = new Button("B");
-	    zoneB.setPrefSize(400, 60);
-	    zoneB.setLayoutX(140);
-	    zoneB.setLayoutY(0);
-	    
-	    Button zoneC = new Button("C");
-	    zoneC.setPrefSize(400, 85);
-	    zoneC.setLayoutX(250);
-	    zoneC.setLayoutY(415);
-	    
-	    Button zoneD = new Button("D");
-	    zoneD.setPrefSize(200, 100);
-	    zoneD.setLayoutX(50);
-	    zoneD.setLayoutY(400);
-	    
-	    Button zoneE = new Button("E");
-	    zoneE.setPrefSize(260, 60);
-	    zoneE.setLayoutX(740);
-	    zoneE.setLayoutY(440);
-	    
-	    Button zoneF = new Button("F");
-	    zoneF.setPrefSize(100, 300);
-	    zoneF.setLayoutX(50);
-	    zoneF.setLayoutY(100);
 	    
 	    Label enthbooks = new Label("English Books and Thai Books");
 	    enthbooks.setRotate(-90);
-	    enthbooks.setPrefSize(500, 50);
+	    enthbooks.setPrefSize(250, 25);
 	    enthbooks.setAlignment(Pos.CENTER);
 	    HBox labelPane = new HBox();
-	    labelPane.setPrefSize(50, 500);
+	    labelPane.setPrefSize(25, 250);
 	    labelPane.setLayoutX(0);
 	    labelPane.setLayoutY(0);
 	    labelPane.setAlignment(Pos.CENTER);
@@ -94,14 +56,9 @@ public class FirstFl extends Application {
 	    
 	    labelPane.getChildren().add(group);
 	    
-	    root.getChildren().addAll(x1, x2, ladder, libr, zoneA, zoneB, zoneC, zoneD, zoneE, zoneF, EE, labelPane);
-	    
-		Scene scene = new Scene(root, 1000, 500);
-		
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Library 1st Fl.");
-		primaryStage.show();
+	    this.getChildren().addAll(x1, x2, ladder, libr, zoneA, zoneB, zoneC, zoneD, zoneE, zoneF, EE, labelPane);
 
+		btns = new HashMap<>();
 		btns.put("A", zoneA);
 		btns.put("B", zoneB);
 		btns.put("C", zoneC);
@@ -110,8 +67,5 @@ public class FirstFl extends Application {
 		btns.put("F", zoneF);
 
 	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
+	
 }
