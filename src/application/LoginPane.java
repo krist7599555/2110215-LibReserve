@@ -21,11 +21,11 @@ public class LoginPane extends GridPane {
 	private String username, password;
 
 	public LoginPane() {
-		this.setAlignment(Pos.CENTER);
+		this.setAlignment(Pos.TOP_CENTER);
 		this.setHgap(10);
 		this.setVgap(10);
 		this.setPadding(new Insets(25, 25, 25, 25));
-		this.setPrefWidth(300);
+		this.setPrefSize(300, 200);
 		initilize();
 	}
 
