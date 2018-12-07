@@ -32,7 +32,7 @@ class LogStage extends Stage {
 
 		final HBox btns = new HBox(5);
 		if (allowcancel) {
-			btns.getChildren().add(this.cancelReserve = new Button("cancel reserve"));
+			btns.getChildren().add(this.cancelReserve = new Button("Cancel Reserve"));
 			this.cancelReserve.setOnAction(e -> {
 				this.fireEvent(new LibReserveEvent(LibReserveEvent.DELETE_LOG, this));
 			});

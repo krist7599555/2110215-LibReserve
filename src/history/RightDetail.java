@@ -26,11 +26,11 @@ class RightDetail extends VBox {
 		this.getStyleClass().addAll("zone-region");
 		this.getChildren().add(new Label(log.getUser() + " (" + log.getPosition() + ")"));
 		this.getChildren().add(new Label(log.getStartTime() + "-" + log.getEndTime().substring(log.getEndTime().length() - 5)));
-		this.getChildren().add(new Label("reserve at " + log.getReserveTime()));
+		this.getChildren().add(new Label("Reserve at " + log.getReserveTime()));
 
 		final HBox btns = new HBox(5);
 		if (allowcancel()) {
-			cancelReserve = new Button("cancel reserve");
+			cancelReserve = new Button("Cancel Reserve");
 			cancelReserve.setOnAction(e -> {
 				this.fireEvent(new LibReserveEvent(LibReserveEvent.DELETE_LOG, this));
 			});
@@ -47,3 +47,4 @@ class RightDetail extends VBox {
 		return Store.isLogin() && log.getUser().equals(Store.getUsername());
 	}
 };
+

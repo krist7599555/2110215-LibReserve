@@ -1,5 +1,6 @@
 package application;
 
+import event.LibReserveEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -17,6 +18,10 @@ public class ControlPane extends VBox {
 		title.setStyle("-fx-font-size: 23px; -fx-font-weight: bold");
 		
 		LoginPane loginPane = new LoginPane();
+		loginPane.addEventHandler(LibReserveEvent.NAVIGATE, e -> {
+			System.out.println("ControlPanal");
+			fireEvent(e);
+		});
 		this.getChildren().add(loginPane);
 	}
 	

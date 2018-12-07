@@ -33,6 +33,20 @@ public class Database {
 		return res;
 	}
 	
+//	public static ArrayList<JSONObject> getUserRecord(String key) {
+//		ArrayList<JSONObject> res = new ArrayList<JSONObject>();
+//		try {
+//			JSONObject pos = reserve.getJSONObject(key);
+//			JSONArray rec = pos.getJSONArray("records");
+//			for (int i = 0; i < rec.length(); ++i) {
+//				if (true) {
+//					res.add(rec.getJSONObject(i));
+//				}
+//			}
+//		} catch (JSONException e) {}
+//		return res;
+//	}
+	
 	public static void main(String[] args) {
 		System.out.println("HELLO");
 	}

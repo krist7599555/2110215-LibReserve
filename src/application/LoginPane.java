@@ -2,6 +2,7 @@ package application;
 
 import database.Config;
 import database.Store;
+import event.LibReserveEvent;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -13,8 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class LoginPane extends GridPane {
@@ -118,10 +121,17 @@ public class LoginPane extends GridPane {
 		success.setStyle("-fx-font-size: 18px; -fx-font-weight: bold");
 		success.setPrefWidth(300);
 		this.add(new Label("Welcome, " + username + "."), 0, 1, 2, 1);
+		HBox bottonPane = new HBox(10);
 		Button signoutBtn = new Button("Sign out");
 		signoutBtn.setPrefWidth(75);
-		this.add(signoutBtn, 1, 2);
-		LoginPane.setHalignment(signoutBtn, HPos.RIGHT);
+		this.add(bottonPane, 1, 2);
+		LoginPane.setHalignment(bottonPane, HPos.RIGHT);
+		Button profileBtn = new Button("Reserve History");
+		bottonPane.getChildren().addAll(profileBtn, signoutBtn);
+		
+		profileBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+			fireEvent(new LibReserveEvent(LibReserveEvent.NAVIGATE, "/root/history"));
+		});
 		signoutBtn.addEventHandler(ActionEvent.ANY, e -> {
 			Store.logout();
 			initilize();
