@@ -142,7 +142,5 @@ public class LoginPane extends GridPane {
 			Store.logout();
 			initilize();
 		});
-
 	}
-
 }

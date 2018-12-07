@@ -8,5 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="lib" path="/Users/krist7599555/Documents/2110215-LibReserve/mylib/java-json.jar"/>
+	<classpathentry kind="lib" path="/Users/krist7599555/Documents/2110215-LibReserve/mylib/controlsfx-9.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
