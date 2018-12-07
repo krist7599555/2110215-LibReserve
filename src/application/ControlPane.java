@@ -10,6 +10,7 @@ public class ControlPane extends VBox {
 	public ControlPane() {
 		super();
 		this.setPadding(new Insets(10));
+		this.setPrefHeight(500);
 		this.setAlignment(Pos.CENTER);
 		Label title = new Label("Engineering Library");
 		this.getChildren().add(title);

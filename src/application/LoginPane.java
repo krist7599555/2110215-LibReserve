@@ -25,11 +25,11 @@ public class LoginPane extends GridPane {
 	
 
 	public LoginPane() {
-		this.setAlignment(Pos.CENTER);
+		this.setAlignment(Pos.TOP_CENTER);
 		this.setHgap(10);
 		this.setVgap(10);
 		this.setPadding(new Insets(25, 25, 25, 25));
-		this.setPrefWidth(300);
+		this.setPrefSize(300, 200);
 		initilize();
 		if (Config.AUTO_LOGIN) {
 			userTextField.setText("1");
