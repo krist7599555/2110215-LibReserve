@@ -1,7 +1,6 @@
 package database;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -12,15 +11,10 @@ import org.json.JSONObject;
 public class Database {
 	static private JSONObject reserve;
 
-	public static final String __dirname() {
-		Path currentRelativePath = Paths.get("");
-		String s = currentRelativePath.toAbsolutePath().toString();
-		return s;
-	}
 	static {
 		try {
 			Database.reserve = new JSONObject(
-					new String(Files.readAllBytes(Paths.get(__dirname() + "/src/database/reserve.json"))));
+					new String(Files.readAllBytes(Paths.get(Pwd.root + "/database/reserve.json"))));
 		} catch (Exception e) {
 			System.err.println("error on static database");
 			e.printStackTrace();

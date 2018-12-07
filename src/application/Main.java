@@ -1,5 +1,6 @@
 package application;
 
+import database.Pwd;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -13,10 +14,12 @@ public class Main extends Application {
 		root.setPrefHeight(200);
 		
 		root.add(new QuietRoom(), 0, 0);
-		root.add(new Map(), 1, 0);
+//		root.add(new Map(), 1, 0);
 		root.add(new ControlPane(), 2, 0);
 		
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add(Pwd.file + "/application/style.css");
+
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

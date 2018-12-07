@@ -1,0 +1,32 @@
+{
+  "A1": {
+    "position": "A1",
+    "zone": "A",
+    "seat": "1",
+    "records": [
+      {
+        "user": "6031301721",
+        "zone": "A",
+        "seat": "1",
+        "startTime": "2018-01-02 12:00",
+        "endTime": "2018-01-02 13:00",
+        "reserveTime": "2018-01-01 12:00"
+      }
+    ]
+  },
+  "A2": {
+    "position": "A2",
+    "zone": "A",
+    "seat": "2",
+    "records": [
+      {
+        "user": "6031301721",
+        "zone": "A",
+        "seat": "2",
+        "startTime": "2018-01-02 12:00",
+        "endTime": "2018-01-02 13:00",
+        "reserveTime": "2018-01-01 12:00"
+      }
+    ]
+  }
+}
