@@ -13,6 +13,11 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		GridPane root = new GridPane();
 		root.add(new PositionSelector(Config.STARTER_PATH), 0, 0);
+		root.setPrefHeight(200);
+		
+//		root.add(new QuietRoom(), 0, 0);
+//		root.add(new Map(), 1, 0);
+		root.add(new SecondFl(), 1, 0);
 		root.add(new ControlPane(), 2, 0);
 		
 		Scene scene = new Scene(root);

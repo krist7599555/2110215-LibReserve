@@ -1,0 +1,29 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.desk-btn {
+    -fx-background-color: #a0d0d6;
+}
+.desk-btn:hover {
+    -fx-background-color: #b0e0e6;
+}
+.desk-btn.is-danger {
+	-fx-background-color: #e48440;
+}
+.desk-btn.is-danger:hover {
+	-fx-background-color: #f4a460;
+}
+
+.zone-region {
+	-fx-background-color: #b0e0e6;
+	-fx-padding: 0px;
+    -fx-border-insets: 0px;
+    -fx-background-insets: 2px;
+    -fx-font-size: 15px;
+}
+.zone-region.is-disabled {
+	-fx-background-color: #d2d2d2;
+}
+
+.time-picker-label {
+	 -fx-font-size: 16px;
+	 -fx-padding: 10 0 30 0;
+}
