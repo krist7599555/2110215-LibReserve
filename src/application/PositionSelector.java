@@ -20,6 +20,8 @@ public class PositionSelector extends VBox {
 	HBox floorSelector;
 	ObservableList<? extends Node> navigatelist;
 	
+	int currentFloor = 1;
+	
 	public PositionSelector(String path) {
 		this();
 		updatePath(path);
@@ -38,20 +40,36 @@ public class PositionSelector extends VBox {
 		floorSelector = new HBox(10);
 		floorSelector.setPrefWidth(700);
 		floorSelector.setAlignment(Pos.CENTER);
-		Button fl1btn = new Button("Floor 1");
-		Button fl2btn = new Button("Floor 2");
+		Button fl1btn = new Button("Floor 1"); fl1btn.getStyleClass().addAll("floor-btn", "left");
+		Button fl2btn = new Button("Floor 2"); fl2btn.getStyleClass().addAll("floor-btn", "right");
+		
 		floorSelector.getChildren().addAll(fl1btn, fl2btn);
 		
 		timePicker = new TimePicker(true);
 		timePicker.addEventHandler(LibReserveEvent.INPUT_CHANGE, e -> {
 			TimePicker tp = (TimePicker) e.getParam();
-			System.out.println(": " + tp.highLabel.getText() + "-" + tp.lowLabel.getText());
 		});
 		
 		this.getChildren().add(navigate);
 		this.getChildren().add(currentMiddleBox = new VBox());
 		this.getChildren().add(floorSelector);
 		this.getChildren().add(timePicker);
+		
+		
+		fl1btn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+			if (!fl1btn.getStyleClass().contains("is-active"))
+				fl1btn.getStyleClass().add("is-active");
+			fl2btn.getStyleClass().remove("is-active");
+			this.currentFloor = 1;
+			setNavigate("");
+		});
+		fl2btn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+			if (!fl2btn.getStyleClass().contains("is-active"))
+				fl2btn.getStyleClass().add("is-active");
+			fl1btn.getStyleClass().remove("is-active");
+			this.currentFloor = 2;
+			setNavigate("");
+		});
 		
 		this.setNavigate("");
 	}
@@ -68,7 +86,6 @@ public class PositionSelector extends VBox {
 	 *  [3] nav = "A13" -> /root/A/A13
 	 */
 	void setNavigate(String nav) {
-		int dest = 1;
 		var child = navigate.getChildren();
 		int level = Math.min(2, nav.length());
 		child.clear();
@@ -80,7 +97,7 @@ public class PositionSelector extends VBox {
 			root.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 				this.setNavigate("");
 			});
-			currentMiddleBox = getFloor();
+			currentMiddleBox = getFloor(currentFloor);
 		}
 		if (level >= 1) {
 			String zone = nav.substring(0, 1);
@@ -107,14 +124,18 @@ public class PositionSelector extends VBox {
 		timePicker.setOpacity(level == 2 ? 0 : 1);
 	}
 	VBox currentMiddleBox;
-	private VBox getFloor() {
-		FirstFl floor1 = new FirstFl();
+	private VBox getFloor(int i) {
+		FirstFl  floor1 = new FirstFl();
 		SecondFl floor2 = new SecondFl();
+		floor1.addEventHandler(LibReserveEvent.SELECTED, e -> {
+			String zone = (String) e.getParam();
+			this.setNavigate(zone);
+		});
 		floor2.addEventHandler(LibReserveEvent.SELECTED, e -> {
 			String zone = (String) e.getParam();
 			this.setNavigate(zone);
 		});
-		return new VBox(floor2);
+		return new VBox(i == 1 ? floor1 : floor2);
 	}
 	private VBox getZone(String zone) {
 		return new VBox(new QuietRoom(zone) {

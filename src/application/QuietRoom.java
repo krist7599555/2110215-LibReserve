@@ -22,26 +22,21 @@ public class QuietRoom extends VBox {
 	private GridPane grid;
 	private Map<String, Button> btns;
 
-	public QuietRoom() {
-		this("A");
-	}
 	public QuietRoom(String zone) {
 		super(10);
 		this.updateZone(zone);
 	}
 
 	public void updateZone(String zone) {
-		
+
 		grid = new GridPane();		
 		btns = new HashMap<String, Button>();
 		
-//		grid.setPadding(new Insets(10));
 		grid.setHgap(1);
 		grid.setVgap(3);
 		grid.setAlignment(Pos.CENTER);
 		
 		try {
-			
 			detail = Table.getZone(zone);
 
 			int sr = 0;
@@ -50,7 +45,7 @@ public class QuietRoom extends VBox {
 			int zc = detail.getInt("sizecol");
 	
 			ArrayList<ArrayList<String>> mat = Table.getSeats(zone);
-			System.out.println(mat);
+
 			for (int i = 0; i < mat.size(); ++i) {
 				for (int j = 0; j < mat.get(i).size(); ++j) {
 					String str = mat.get(i).get(j);

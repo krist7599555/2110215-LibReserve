@@ -37,10 +37,8 @@ public class History extends HBox {
 		final ListView<HistoryLog> listView = new ListView<HistoryLog>(labelList);
 		root.getChildren().addAll(listView);
 
-		for (JSONObject jo : Database.getPositionRecord(position)) {		
-			
+		for (JSONObject jo : Database.getPositionRecordFULL(position)) {		
 			final Log log = new Log(jo);
-			System.out.println(log.toString());
 			logs.add(new Log(jo));
 			final HistoryLog nameLabel = new HistoryLog(log);
 			

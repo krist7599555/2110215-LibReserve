@@ -13,7 +13,7 @@ class RightDetail extends VBox {
 	private Log log;
 	
 	RightDetail() {
-		this(Log.NONE());
+		this.setAlignment(Pos.CENTER);
 		this.getChildren().add(new Label("No Data to Display"));
 		
 	}
@@ -21,11 +21,10 @@ class RightDetail extends VBox {
 		this.log = log;
 
 		this.setAlignment(Pos.CENTER);
-//		this.setPrefWidth(500);
-//		this.setMinHeight(500);
+
 		this.getStyleClass().addAll("zone-region");
 		this.getChildren().add(new Label(log.getUser() + " (" + log.getPosition() + ")"));
-		this.getChildren().add(new Label(log.getStartTime() + "-" + log.getEndTime().substring(log.getEndTime().length() - 5)));
+		this.getChildren().add(new Label(log.getStartTime() + "-" + log.getEndTime()));
 		this.getChildren().add(new Label("reserve at " + log.getReserveTime()));
 
 		final HBox btns = new HBox(5);

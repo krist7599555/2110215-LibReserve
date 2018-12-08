@@ -11,82 +11,73 @@ import org.json.JSONObject;
 public class Log {
 	static final SimpleDateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	static final SimpleDateFormat DATEONLYFORMAT = new SimpleDateFormat("yyyy-MM-dd");
-	public String user;
-	public String zone;
-	public Integer seat;
-	public String startTime;
-	public String endTime;
-	public String reserveTime;
+	public String username;
+	public String position;
+	public Integer startTime;
+	public Integer endTime;
+	public Integer reserveTime;
 
 	static String now() {
 		return DATEFORMAT.format(new Date());
 	}
 
-	static String toSimpleDate(String date) {
-		try {
-			Calendar c = Calendar.getInstance();
-			for (int i = -1; i <= 1; ++i) {
-				c.setTime(DATEFORMAT.parse(now()));
-				c.add(Calendar.DATE, i);
-				String newstr = DATEONLYFORMAT.format(c.getTime());
-				date = date.replace(newstr, i == -1 ? "yesterday" : i == 0 ? "today" : i == 1 ? "tomorrow" : "");
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return date;
+//	static String toSimpleDate(String date) {
+//		try {
+//			Calendar c = Calendar.getInstance();
+//			for (int i = -1; i <= 1; ++i) {
+//				c.setTime(DATEFORMAT.parse(now()));
+//				c.add(Calendar.DATE, i);
+//				String newstr = DATEONLYFORMAT.format(c.getTime());
+//				date = date.replace(newstr, i == -1 ? "yesterday" : i == 0 ? "today" : i == 1 ? "tomorrow" : "");
+//			}
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		return date;
+//	}
+	static String toSimpleTime(int tm) {
+		return (tm / 60) + ":" + (tm % 60);
 	}
+	
 	
 	public Log(JSONObject jo) {
 		try {
-			this.user = jo.getString("user");
-			this.zone = jo.getString("zone");
-			this.seat = Integer.parseInt(jo.getString("seat"));
-			this.startTime = jo.getString("startTime");
-			this.endTime = jo.getString("endTime");
-			this.reserveTime = jo.getString("reserveTime");
+			this.username      = jo.has("username")     ? jo.getString("username")     : "NO USER";
+			this.position  = jo.has("position") ? jo.getString("position") : "Z0";
+			this.startTime = jo.has("startTime")? jo.getInt("startTime")   : 0;
+			this.endTime   = jo.has("endTime")  ? jo.getInt("endTime")     : 0;
+			this.reserveTime = jo.has("reserveTime") ? jo.getInt("reserveTime") : 0;
 		} catch (JSONException e) {
-			System.out.println("JSON parse to log fail " + jo);
+			System.err.println("[Error] JSON parse Log.java :" + jo);
 		}
 	}
-	public Log(String user, String zone, Integer seat) {
-		this(user, zone, seat, now(), now(), now());
-	}
-	public static Log NONE() {
-		return new Log("Mr. Null Pointer", "NO ZONE", -1);
-	}
 
-	public Log(String user, String zone, Integer seat, String startTime, String endTime, String reserveTime) {
-		this.user = user;
-		this.zone = zone;
-		this.seat = seat;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.reserveTime = reserveTime;
+	public static Log NONE() {
+		return new Log(new JSONObject());
 	}
 
 	String getUser() {
-		return user;
+		return username;
 	}
 
 	String getZone() {
-		return zone;
+		return position.substring(0, 1);
 	}
 
 	String getSeat() {
-		return seat.toString();
+		return position.substring(1);
 	}
 
 	String getStartTime() {
-		return toSimpleDate(this.startTime);
+		return toSimpleTime(this.startTime);
 	}
 
 	String getEndTime() {
-		return toSimpleDate(this.endTime);
+		return toSimpleTime(this.endTime);
 	}
 
 	String getReserveTime() {
-		return toSimpleDate(this.reserveTime);
+		return toSimpleTime(this.reserveTime);
 	}
 
 	String getPosition() {
