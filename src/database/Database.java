@@ -1,7 +1,5 @@
 package database;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -13,27 +11,40 @@ public class Database {
 
 	static {
 		try {
-			Database.reserve = new JSONObject(
-					new String(Files.readAllBytes(Paths.get(Pwd.root + "/database/reserve.json"))));
+			var table = Axios.GET("http://128.199.216.159:3721/table");
+			Database.reserve = new JSONObject(table.getData());
 		} catch (Exception e) {
-			System.err.println("error on static database");
+			System.err.println("[Error] Parse Json Error");
 			e.printStackTrace();
 		}
 	}
 
 	public static ArrayList<JSONObject> getPositionRecord(String key) {
-		ArrayList<JSONObject> res = new ArrayList<JSONObject>();
+		ArrayList<JSONObject> res = new ArrayList<>();
+		if (!reserve.has(key)) return res;
 		try {
-			JSONObject pos = reserve.getJSONObject(key);
-			JSONArray rec = pos.getJSONArray("records");
-			for (int i = 0; i < rec.length(); ++i) {
-				res.add(rec.getJSONObject(i));
+			JSONArray arr = reserve.getJSONArray(key);
+			for (int i = 0; i < arr.length(); ++i) {
+				res.add(arr.getJSONObject(i));
 			}
-		} catch (JSONException e) {}
+		} catch (JSONException e) {
+			System.out.println("[ERROR] Parse Json Error in getPositionRecord");
+			e.printStackTrace();
+		}
 		return res;
 	}
-	
-	public static void main(String[] args) {
-		System.out.println("HELLO");
+
+	public static boolean add(String username, int startTime, int endTime, String position) {
+		String queryStr = new StringBuilder()
+				.append("?username=" + username)
+				.append("&startTime=" + startTime)
+				.append("?endTime=" + endTime)
+				.append("&position=" + position).toString();
+		var res = Axios.GET("http://128.199.216.159:3721/add" + queryStr);
+		if (!res.isOK()) {
+			System.err.println(res);
+		}
+		return res.isOK();
 	}
+	
 }
