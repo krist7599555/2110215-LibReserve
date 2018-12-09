@@ -10,9 +10,9 @@ import history.Log;
  * 
  */
 public class Config {
-	static public final String STARTER_PATH = "/root/A/A70";
+	static public final String STARTER_PATH = "/root";
 	static public final Boolean AUTO_LOGIN = false;
-	static public final Boolean FIX_DATE_TIME = true;
+	static public final Boolean FIX_DATE_TIME = false;
 	static public final Date DATE_TIME;
 	static {
 		Date parse = null;

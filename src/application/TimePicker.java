@@ -8,6 +8,7 @@ import javafx.util.StringConverter;
 import org.controlsfx.control.RangeSlider;
 
 import event.LibReserveEvent;
+import history.Log;
 
 
 /*
@@ -40,11 +41,15 @@ public class TimePicker extends HBox {
 	public TimePicker() {
 		super();
 		this.setAlignment(Pos.CENTER);
-		this.lowTime = roundMinute(780);
-		this.highTime = roundMinute(850);
+		
+		long mn = Math.min(Math.max(480, Log.getNowTimeMinute()), 1200);
+		long mx = Math.min(mn + 60, 1200);
+		
+		this.lowTime = roundMinute(mn);
+		this.highTime = roundMinute(mx);
 		this.lowLabel = new Label(minute2str(lowTime));
 		this.highLabel = new Label(minute2str(highTime));
-
+		
 		slider = new RangeSlider(480, 1200, lowTime, highTime);
 		slider.setPadding(new Insets(15));
 		slider.setLowValue(this.lowTime);

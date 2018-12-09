@@ -38,10 +38,12 @@ public class ControlPane extends VBox {
 		mapBtnPane.getChildren().add(mapBtn);
 		mapBtnPane.setAlignment(Pos.CENTER_RIGHT);
 		mapBtn.getStyleClass().add("map-btn");
+		mapBtn.setAlignment(Pos.CENTER);
 		
-		ImageView mapLogo = new ImageView(new Image("file:///Users/krist7599555/Documents/2110215-LibReserve/src/image/location-on-map.png"));
-		mapLogo.setFitHeight(67);
-	    mapLogo.setFitWidth(69);
+		var logoURL = FullMapPopup.class.getClassLoader().getResource("image/location-on-map.png");
+		ImageView mapLogo = new ImageView(new Image("file:" + logoURL.getFile()));
+		mapLogo.setFitHeight(45);
+	    mapLogo.setFitWidth(45);
 	    ColorAdjust blackout = new ColorAdjust();
         blackout.setBrightness(1.0);
         mapLogo.setEffect(blackout);
@@ -49,8 +51,10 @@ public class ControlPane extends VBox {
 		mapBtn.setGraphic(mapLogo);
 		mapBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e  -> FullMapPopup.show());
 		
-		VBox.setMargin(mapBtn, new Insets(10));
-		this.getChildren().add(mapBtnPane);
+		VBox.setMargin(mapBtn, new Insets(15, 10, 10, 10));
+		HBox wrapper = new HBox(mapBtnPane);
+		wrapper.setAlignment(Pos.CENTER);
+		this.getChildren().add(wrapper);
 
 		LoginPane loginPane = new LoginPane();
 		loginPane.addEventHandler(LibReserveEvent.UPDATE_ROUTE, e -> fireEvent(e));
