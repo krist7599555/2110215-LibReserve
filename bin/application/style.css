@@ -18,8 +18,8 @@
 .reserve-btn {
 	-fx-background-color: #a4e490;
 	-fx-font-size: 23.0px;
-	fx-pref-widt:h	200.0;	 
-	-fx-pref-height: 200.0;
+	fx-pref-widt:	100.0;	 
+	-fx-pref-height: 100.0;
 }
 .reserve-btn.is-disabled {
 	-fx-background-color: #ccc;
@@ -82,4 +82,53 @@
 	 -fx-padding: 10.0 0.0 30.0 0.0;
 	 -fx-min-width: 50.0px;
 	 -fx-max-width: 50.0px;
+}
+
+.ControlPane {
+	-fx-background-color: rgb(67, 54, 50);
+	-fx-text-fill: #f4f4f4;
+}
+
+.ControlPane > *,
+.ControlPane .LoginPane > *,
+.ControlPane .Contract > * {
+	-fx-text-fill: #f4f4f4;
+}
+
+.LoginPane .input {
+	-fx-text-fill: rgb(62, 50, 47);
+	-fx-pref-width: 75;
+	-fx-padding: 7 7;
+	-fx-background-color: #f4f4f4;
+}
+.LoginPane HBox {
+	-fx-background-color: transparent;
+	-fx-padding: 0;
+}
+.LoginPane HBox .button {
+	-fx-background-color: #f4f4f4bb;
+	-fx-border-radius: 8 8 8 8;
+	-fx-padding: 5 16;
+	-fx-pref-width: 75;
+}
+.LoginPane HBox .button:hover {
+	-fx-background-color: #f4f4f4;
+	-fx-border-radius: 8 8 8 8;
+	-fx-padding: 5 16;
+}
+
+.map-btn {
+	-fx-background-color: transparent; 
+	-fx-border-radius: 8 8 8 8;
+	-fx-max-width: 100;
+	-fx-width: 100;
+	-fx-opacity: 0.8;
+}
+.map-btn:hover {
+	-fx-opacity: 1;
+}
+
+.button.is-space {
+	-fx-pref-width: 100;
+	
 }

@@ -8,6 +8,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import history.Log;
+
 /*
  * Table = Helper function to process seats & position
  * 
@@ -108,6 +110,9 @@ public class Table {
 
 	public static ArrayList<String> getValidSeat(long s, long t, String search) {
 		var res = new ArrayList<String>();
+		if (s < Log.getNowTimeMinute()) {
+			return res;
+		}
 		for (String position : allseat) {
 			boolean ok = true;
 			for (var record : Database.getPositionRecord(position)) {

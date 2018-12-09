@@ -6,23 +6,37 @@ import java.util.Date;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import database.Config;
+
 
 /*
  * Log = Wrapper of JSONObject information
  * 
  */
 public class Log {
-	static final SimpleDateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	static final SimpleDateFormat DATEONLYFORMAT = new SimpleDateFormat("yyyy-MM-dd");
+	public static final SimpleDateFormat TIMEFORMAT = new SimpleDateFormat("HH:mm");
+	public static final SimpleDateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd");
+	public static final SimpleDateFormat DATETIMEFORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	public String username;
 	public String position;
 	public Integer startTime;
 	public Integer endTime;
 	public Integer reserveTime;
 
-	static String now() {
-		return DATEFORMAT.format(new Date());
+	public static String getNowTime() {
+		return TIMEFORMAT.format(Config.DATE_TIME);
 	}
+	public static String getNowDate() {
+		return DATEFORMAT.format(Config.DATE_TIME);
+	}
+	public static String getNowDateTime() {
+		return DATETIMEFORMAT.format(Config.DATE_TIME);
+	}
+	public static long getNowTimeMinute() {
+		String[] s = getNowTime().split(":");
+		return Integer.valueOf(s[0]) * 60 + Integer.valueOf(s[1]);
+	}
+	
 
 	static String toSimpleTime(int tm) {
 		return (tm / 60) + ":" + (tm % 60) + (tm % 60 <= 9 ? "0" : "");

@@ -8,9 +8,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -21,44 +26,42 @@ public class ControlPane extends VBox {
 
 	public ControlPane() {
 		super();
-		this.setPadding(new Insets(10));
+		this.setPadding(new Insets(90, 0, 50, 0));
 		this.setPrefHeight(500);
 		this.setAlignment(Pos.CENTER);
 		Label title = new Label("Engineering Library");
 		this.getChildren().add(title);
 		title.setStyle("-fx-font-size: 23px; -fx-font-weight: bold");
 		VBox mapBtnPane = new VBox(15);
-		Button mapBtn = new Button("View Full Map");
+		
+		Button mapBtn = new Button();
 		mapBtnPane.getChildren().add(mapBtn);
 		mapBtnPane.setAlignment(Pos.CENTER_RIGHT);
-		mapBtn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				VBox fullMap = new VBox(10);
-				fullMap.setPadding(new Insets(10));
-				fullMap.setAlignment(Pos.CENTER_RIGHT);
-				//String firstFlpath = "res/images/firstFl.png";
-				Label firstFlL = new Label("1st Floor");
-				firstFlL.setAlignment(Pos.CENTER_RIGHT);
-				firstFlL.setStyle("-fx-font-size: 20px; -fx-font-weight:bold");
-				Label secondFlL = new Label("2nd Floor");
-				secondFlL.setStyle("-fx-font-size: 20px; -fx-font-weight:bold");
-				secondFlL.setAlignment(Pos.CENTER_RIGHT);
-				ImageView firstFl = new ImageView(new Image("file:res/images/firstFl.png"));
-				ImageView secondFl = new ImageView(new Image("file:res/images/secondFl.png"));
-				fullMap.getChildren().addAll(secondFlL, secondFl, firstFlL, firstFl);
-				Scene mapScene = new Scene(fullMap, 620, 700);
-				Stage stage = new Stage();
-				stage.setScene(mapScene);
-				stage.show();
-			}
-		});
-		mapBtnPane.setPadding(new Insets(10));
+		mapBtn.getStyleClass().add("map-btn");
+		
+		ImageView mapLogo = new ImageView(new Image("file:///Users/krist7599555/Documents/2110215-LibReserve/src/image/location-on-map.png"));
+		mapLogo.setFitHeight(67);
+	    mapLogo.setFitWidth(69);
+	    ColorAdjust blackout = new ColorAdjust();
+        blackout.setBrightness(1.0);
+        mapLogo.setEffect(blackout);
+	    
+		mapBtn.setGraphic(mapLogo);
+		mapBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e  -> FullMapPopup.show());
+		
+		VBox.setMargin(mapBtn, new Insets(10));
 		this.getChildren().add(mapBtnPane);
 
 		LoginPane loginPane = new LoginPane();
 		loginPane.addEventHandler(LibReserveEvent.UPDATE_ROUTE, e -> fireEvent(e));
+		this.getStyleClass().add("ControlPane");
 		this.getChildren().add(loginPane);
+
+		final Region rg = new Region();
+		VBox.setVgrow(rg, Priority.ALWAYS);
+		this.getChildren().add(rg);
+		
+		this.getChildren().add(new ContactPane());
 	}
 
 }

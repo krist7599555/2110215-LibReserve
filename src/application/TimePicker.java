@@ -67,15 +67,24 @@ public class TimePicker extends HBox {
 			}
 		});
 		slider.lowValueProperty().addListener((observable, oldValue, newValue) -> {
-			this.lowLabel.setText(minute2str(this.lowTime = roundMinute(newValue.longValue())));
+			setLow(newValue.longValue());
 			this.fireEvent(new LibReserveEvent(LibReserveEvent.INPUT_CHANGE, this));
 		});
 		slider.highValueProperty().addListener((observable, oldValue, newValue) -> {
-			this.highLabel.setText(minute2str(this.highTime = roundMinute(newValue.longValue())));
+			setHigh(newValue.longValue());
 			this.fireEvent(new LibReserveEvent(LibReserveEvent.INPUT_CHANGE, this));
 		});
 
 		this.getChildren().addAll(slider);
+	}
+	
+	public void setLow(long l) {
+		this.lowLabel.setText(minute2str(this.lowTime = roundMinute(l)));
+		slider.setLowValue(l);
+	}
+	public void setHigh(long l) {
+		this.highLabel.setText(minute2str(this.highTime = roundMinute(l)));
+		slider.setHighValue(l);
 	}
 
 }

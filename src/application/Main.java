@@ -27,9 +27,11 @@ public class Main extends Application {
 
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(Pwd.file + "/application/style.css");
-
+		
+		primaryStage.setTitle("Engineering Library");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		primaryStage.setResizable(false);
 
 		ctrlPane.addEventHandler(LibReserveEvent.UPDATE_ROUTE, e -> {
 			positionSelector.setNavigate((String) e.getParam());
