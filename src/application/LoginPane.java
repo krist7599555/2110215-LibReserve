@@ -139,8 +139,9 @@ public class LoginPane extends GridPane {
 		signoutBtn.setPrefWidth(75);
 		Button historyBtn = new Button("History");
 		historyBtn.setPrefWidth(75);
-		this.add(new HBox(historyBtn, signoutBtn), 1, 2);
-		LoginPane.setHalignment(signoutBtn, HPos.RIGHT);
+		bottonPane.getChildren().addAll(historyBtn, signoutBtn);
+		this.add(bottonPane, 1, 2);
+		bottonPane.setAlignment(Pos.BOTTOM_RIGHT);
 		historyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			this.fireEvent(new LibReserveEvent(LibReserveEvent.UPDATE_ROUTE, "/root/history"));
 		});

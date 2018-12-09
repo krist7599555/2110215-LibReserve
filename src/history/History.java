@@ -13,8 +13,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-//import javafx.scene.layout.Priority;
-//import javafx.scene.layout.Region;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 /*
@@ -66,6 +66,7 @@ public class History extends HBox {
 			labelList.add(nameLabel);
 		}
 		this.setAlignment(Pos.CENTER);
+		this.setSpacing(10);
 		this.getChildren().addAll(new HBox(root, rightDetail = new RightDetail()), navigateBack = new Button("Go Back"));
 		
 		rightDetail.addEventHandler(LibReserveEvent.UPDATE_LOG, e -> {

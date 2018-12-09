@@ -64,6 +64,7 @@ public class PositionSelector extends VBox {
 		floorSelector.setAlignment(Pos.CENTER);
 		Button fl1btn = new Button("Floor 1");
 		fl1btn.getStyleClass().addAll("floor-btn", "left");
+		fl1btn.getStyleClass().add("is-active");
 		Button fl2btn = new Button("Floor 2");
 		fl2btn.getStyleClass().addAll("floor-btn", "right");
 

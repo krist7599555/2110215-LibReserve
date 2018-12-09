@@ -53,7 +53,9 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 				Database.add(log.username, log.startTime, log.endTime, log.position);
 				fireEvent(new LibReserveEvent(LibReserveEvent.UPDATE_LOG));
 			} else {
-				Alert alrt = new Alert(AlertType.ERROR, "Please login", ButtonType.CLOSE);
+				Alert alrt = new Alert(AlertType.ERROR, "Please Login First!", ButtonType.CLOSE);
+				alrt.setTitle("Error");
+				alrt.setHeaderText("Cannot Reserve");
 				alrt.show();
 			}
 		});

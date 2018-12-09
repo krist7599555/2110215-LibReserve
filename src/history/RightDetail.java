@@ -3,6 +3,7 @@ package history;
 import database.Database;
 import database.Store;
 import event.LibReserveEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -37,6 +38,8 @@ class RightDetail extends VBox {
 	public void set() {
 		this.log = null;
 		this.cancelReserve = null;
+		this.setSpacing(10);
+		this.setPrefWidth(150);
 		this.setAlignment(Pos.CENTER);
 		this.getChildren().clear();
 		this.getChildren().add(new Label("No Data to Display"));
@@ -46,6 +49,8 @@ class RightDetail extends VBox {
 		this.log = log;
 		this.getChildren().clear();
 		this.setAlignment(Pos.CENTER);
+		this.setPrefWidth(150);
+		this.setSpacing(10);
 		this.getStyleClass().addAll("zone-region");
 		this.getChildren().add(new Label(log.getUser() + " (" + log.getPosition() + ")"));
 		this.getChildren().add(new Label(log.getStartTime() + "-" + log.getEndTime()));
@@ -53,7 +58,7 @@ class RightDetail extends VBox {
 
 		final HBox btns = new HBox(5);
 		if (allowcancel()) {
-			cancelReserve = new Button("cancel reserve");
+			cancelReserve = new Button("Cancel Reserve");
 			cancelReserve.getStyleClass().add("cancelReserve-btn");
 			cancelReserve.setOnAction(e -> {
 				Database.remove(Store.getUsername(), log.startTime, log.endTime, log.position);

@@ -41,7 +41,7 @@ public class FirstFl extends Pane implements TimeIntervalUpdate {
 		label.setRotate(-90);
 		libr.setGraphic(new Group(label));
 
-		Label EE = new Label("Exit");
+		Label EE = new Label("Enter");
 		EE.setAlignment(Pos.CENTER);
 		EE.setPrefSize(49, 42);
 		EE.setLayoutX(409.5);
