@@ -11,21 +11,42 @@
 .desk-btn.is-danger:hover {
 	-fx-background-color: #f4a460;
 }
+.desk-btn.is-disabled {
+	-fx-background-color: #ccc;
+	-fx-text-fill: #888;
+}
+.reserve-btn {
+	-fx-background-color: #a4e490;
+	-fx-font-size: 23.0px;
+	fx-pref-widt:h	200.0;	 
+	-fx-pref-height: 200.0;
+}
+.reserve-btn.is-disabled {
+	-fx-background-color: #ccc;
+	-fx-text-fill: #888;
+}
+
+.back-btn {
+	-fx-background-color: #a4e490;
+}
+.cancelReserve-btn {
+	-fx-background-color: #f47460;
+}
 
 .floor-btn {
 	-fx-border-color: black;
 	-fx-border-style: dashed;
-	-fx-border-width: 0;
+	-fx-border-width: 0.0;
 	-fx-background-color: #b3d9ff;
-	-fx-padding: 10px 50px;
-	-fx-font-size: 13px;
+	-fx-padding: 10.0px 50.0px;
+	-fx-font-size: 13.0px;
 	-fx-border-style: solid;
-	-fx-border-width: 0;
+	-fx-border-width: 0.0;
 	-fx-border-color: #f4f4f4;
 }
 .floor-btn.is-active {
 	-fx-border-color: #e6f3ff;
-	-fx-font-size: 18px;
+	-fx-font-size: 18.0px;
 	-fx-font-weight: bold;
 }
 .floor-btn:hover {
@@ -40,25 +61,25 @@
 }
 * */
 .floor-btn.left, .floor-btn.right {
-	-fx-border-radius: 16 16 0 0;
-	-fx-background-radius: 16 16 0 0;
+	-fx-border-radius: 16.0 16.0 0.0 0.0;
+	-fx-background-radius: 16.0 16.0 0.0 0.0;
 }
 
 
 .zone-region {
 	-fx-background-color: #b0e0e6;
-	-fx-padding: 0px;
-    -fx-border-insets: 0px;
-    -fx-background-insets: 2px;
-    -fx-font-size: 15px;
+	-fx-padding: 0.0px;
+    -fx-border-insets: 0.0px;
+    -fx-background-insets: 2.0px;
+    -fx-font-size: 15.0px;
 }
 .zone-region.is-disabled {
 	-fx-background-color: #d2d2d2;
 }
 
 .time-picker-label {
-	 -fx-font-size: 16px;
-	 -fx-padding: 10 0 30 0;
-	 -fx-min-width: 50px;
-	 -fx-max-width: 50px;
+	 -fx-font-size: 16.0px;
+	 -fx-padding: 10.0 0.0 30.0 0.0;
+	 -fx-min-width: 50.0px;
+	 -fx-max-width: 50.0px;
 }

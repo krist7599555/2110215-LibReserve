@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/*
+ * AxiosResponse = Helper class for sending request
+ * 
+ */
 class AxiosResponse {
 	private int code;
 	private String data;
@@ -22,11 +26,11 @@ class AxiosResponse {
 	public String getData() {
 		return data;
 	}
-	
+
 	public boolean isOK() {
 		return 200 <= code && code < 300;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "AxiosResponse(" + code + ", \"" + data + "\")";
@@ -43,7 +47,8 @@ public class Axios {
 			connection.connect();
 
 			int code = connection.getResponseCode();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(code < 300 ? connection.getInputStream() : connection.getErrorStream()));
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(code < 300 ? connection.getInputStream() : connection.getErrorStream()));
 			StringBuilder results = new StringBuilder();
 			for (String line; (line = reader.readLine()) != null;) {
 				results.append(line);

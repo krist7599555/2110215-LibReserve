@@ -6,19 +6,33 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+/*
+ * Database 
+ * 		= middleware to connected with server
+ * 		
+ * 		GET /add 		= add new record
+ * 		GET /remove 	= remove record
+ * 		GET /table		= return records base on filtering
+ * 
+ */
 public class Database {
 	static private JSONObject reserve;
 
 	static {
+		initialize();
+	}
+
+	public static void initialize() {
 		try {
 			var table = Axios.GET("http://128.199.216.159:3721/table");
 			Database.reserve = new JSONObject(table.getData());
 		} catch (Exception e) {
-			System.err.println("[Error] Parse Json Error");
+			System.err.println("[Error] Parse Json Error Database.java");
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static ArrayList<?> toArrayList(JSONArray arr) {
 		ArrayList<Object> res = new ArrayList<>();
 		for (int i = 0; i < arr.length(); ++i) {
@@ -30,6 +44,7 @@ public class Database {
 		}
 		return res;
 	}
+
 	@SuppressWarnings("unchecked")
 	public static ArrayList<JSONObject> getPositionRecordFULL(String key) {
 		AxiosResponse table = Axios.GET("http://128.199.216.159:3721/table/" + key);
@@ -40,30 +55,54 @@ public class Database {
 			arr = new JSONArray();
 			e.printStackTrace();
 		}
-		return (ArrayList<JSONObject>) toArrayList(arr);
+		return sortByStartTime((ArrayList<JSONObject>) toArrayList(arr));
 	}
+
+	public static ArrayList<JSONObject> sortByStartTime(ArrayList<JSONObject> arr) {
+		arr.sort((l, r) -> {
+			try {
+				int ltm = l.getInt("startTime");
+				int rtm = r.getInt("startTime");
+				return ltm - rtm;
+			} catch (JSONException e) {
+				return 0;
+			}
+		});
+		return arr;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static ArrayList<JSONObject> getHistory(String username) {
+		AxiosResponse table = Axios.GET("http://128.199.216.159:3721/history/" + username);
+		JSONArray arr;
+		try {
+			arr = new JSONArray(table.getData());
+		} catch (JSONException e) {
+			arr = new JSONArray();
+			e.printStackTrace();
+		}
+		return sortByStartTime((ArrayList<JSONObject>) toArrayList(arr));
+	}
+
 	public static ArrayList<JSONObject> getPositionRecord(String key) {
-		System.err.println("[ERROR] NEED To fetch from SERVER in getPositionRecord in Database.java");
 		ArrayList<JSONObject> res = new ArrayList<>();
-		if (!reserve.has(key)) return res;
+		if (!reserve.has(key))
+			return res;
 		try {
 			JSONArray arr = reserve.getJSONArray(key);
 			for (int i = 0; i < arr.length(); ++i) {
 				res.add(arr.getJSONObject(i));
 			}
 		} catch (JSONException e) {
-			System.err.println("[ERROR] Parse Json Error in getPositionRecord in Database.java");
+			System.err.println("[Error] Parse Json Error in getPositionRecord in Database.java");
 			e.printStackTrace();
 		}
-		return res;
+		return sortByStartTime(res);
 	}
 
 	public static boolean add(String username, int startTime, int endTime, String position) {
-		String queryStr = new StringBuilder()
-				.append("?username=" + username)
-				.append("&startTime=" + startTime)
-				.append("&endTime=" + endTime)
-				.append("&position=" + position).toString();
+		String queryStr = new StringBuilder().append("?username=" + username).append("&startTime=" + startTime)
+				.append("&endTime=" + endTime).append("&position=" + position).toString();
 		String url = "http://128.199.216.159:3721/add" + queryStr;
 		var res = Axios.GET(url);
 		if (!res.isOK()) {
@@ -71,13 +110,27 @@ public class Database {
 		} else {
 			System.out.println(res + " GET " + url);
 		}
+		refresh();
 		return res.isOK();
 	}
-	
-	public static void main(String[] args) {
-		for (int i = 0; i < 10; ++i) {			
-			add("mee_ok", i * 30, i * 30 + 30, "C4");
+
+	public static boolean remove(String username, int startTime, int endTime, String position) {
+		String queryStr = new StringBuilder().append("?username=" + username).append("&startTime=" + startTime)
+				.append("&endTime=" + endTime).append("&position=" + position).toString();
+		String url = "http://128.199.216.159:3721/remove" + queryStr;
+		var res = Axios.GET(url);
+		if (!res.isOK()) {
+			System.err.println(res + " GET " + url);
+		} else {
+			System.out.println(res + " GET " + url);
 		}
+		refresh();
+		return res.isOK();
 	}
-	
+
+	static void refresh() {
+		Database.initialize();
+		Table.initialize();
+	}
+
 }

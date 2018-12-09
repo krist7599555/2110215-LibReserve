@@ -8,7 +8,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-// STATIC TABLE POSITION
+/*
+ * Table = Helper function to process seats & position
+ * 
+ * 		= Pure table 		=> process to json and matrix
+ * 		= Server Record		=> helping filter data & record before render
+ *  
+ */
 public class Table {
 	static private JSONObject table;
 	static private ArrayList<String> allseat = new ArrayList<>();
@@ -55,8 +61,10 @@ public class Table {
 
 	public static JSONObject getZone(String zone) {
 		try {
-			return table.getJSONObject(zone);
+			return table.getJSONObject(zone.substring(0, 1));
 		} catch (JSONException e) {
+			System.err.println("[Error] Table.java getZone [" + zone + "] not in " + table);
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -78,8 +86,27 @@ public class Table {
 		}
 		return res;
 	}
+	public static ArrayList<String> getFaltSeats(String zone) {
+		ArrayList<String> res = new ArrayList<>();
+		try {
+			JSONArray row = table.getJSONObject(zone).getJSONArray("seat");
+			for (int i = 0; i < row.length(); ++i) {
+				JSONArray col = row.getJSONArray(i);
+				for (int j = 0; j < col.length(); ++j) {
+					String s = col.getString(j);
+					if (s.length() != 0) {
+						res.add(s);
+					}
+				}
+			}
 
-	private static ArrayList<String> getValidSeat(int s, int t) {
+		} catch (JSONException e) {
+		}
+		return res;
+	}
+	
+
+	public static ArrayList<String> getValidSeat(long s, long t, String search) {
 		var res = new ArrayList<String>();
 		for (String position : allseat) {
 			boolean ok = true;
@@ -100,6 +127,9 @@ public class Table {
 			}
 		}
 		return res;
+	}
+	public static boolean isValidSeat(long s, long t, String position) {
+		return getValidSeat(s, t, position).contains(position);
 	}
 
 }

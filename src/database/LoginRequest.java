@@ -1,5 +1,8 @@
 package database;
 
+/*
+ * LoginRequest = helper function to login
+ */
 public class LoginRequest {
 
 	protected static boolean login(String username, String password) {

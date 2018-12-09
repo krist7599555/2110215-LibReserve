@@ -1,27 +1,28 @@
 package application;
 
+import database.Table;
 import java.util.HashMap;
 import java.util.Map;
-
-import event.LibReserveEvent;
-//import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-//import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-//import javafx.stage.Stage;
 import javafx.scene.text.TextAlignment;
+import event.LibReserveEvent;
 
-public class SecondFl extends Pane {
-	
+/*
+ * SecondFl = Button pane represent 2nd floor
+ * 		- RegionButton as helper class
+ */
+public class SecondFl extends Pane implements TimeIntervalUpdate {
+
 	Map<String, Button> btns;
 
 	public SecondFl() {
-		
+
 		this.setPrefSize(700, 350);
 
 		RegionButton x1 = new RegionButton("---X---", 115.5, 59.5, 0, 0, true);
@@ -36,22 +37,22 @@ public class SecondFl extends Pane {
 		RegionButton zoneM = new RegionButton("M", 476, 80.5, 182, 0);
 
 		ladder.setTextAlignment(TextAlignment.CENTER);
-		
-	    Label circu = new Label("Circulation Issues and Achieves Room");
-	    circu.setRotate(-90);
-	    circu.setPrefSize(350, 42);
-	    circu.setAlignment(Pos.CENTER);
-	    HBox labelPane = new HBox();
-	    labelPane.setPrefSize(42, 350);
-	    labelPane.setLayoutX(658);
-	    labelPane.setLayoutY(0);
-	    labelPane.setAlignment(Pos.CENTER);
-	    Group group = new Group(circu);
-	    
-	    labelPane.getChildren().add(group);
-	    
-	    this.getChildren().addAll(x1, x2, ladder, zoneG, zoneH, zoneI, zoneJ, zoneK, zoneL, zoneM, labelPane);
-	    
+
+		Label circu = new Label("Circulation Issues and Achieves Room");
+		circu.setRotate(-90);
+		circu.setPrefSize(350, 42);
+		circu.setAlignment(Pos.CENTER);
+		HBox labelPane = new HBox();
+		labelPane.setPrefSize(42, 350);
+		labelPane.setLayoutX(658);
+		labelPane.setLayoutY(0);
+		labelPane.setAlignment(Pos.CENTER);
+		Group group = new Group(circu);
+
+		labelPane.getChildren().add(group);
+
+		this.getChildren().addAll(x1, x2, ladder, zoneG, zoneH, zoneI, zoneJ, zoneK, zoneL, zoneM, labelPane);
+
 		btns = new HashMap<>();
 		btns.put("G", zoneG);
 		btns.put("H", zoneH);
@@ -67,7 +68,23 @@ public class SecondFl extends Pane {
 				this.fireEvent(new LibReserveEvent(LibReserveEvent.SELECTED, i.getKey()));
 			});
 		}
-		
+
+	}
+
+	@Override
+	public void intervalUpdate(long s, long t) {
+		StringBuilder cnt1 = new StringBuilder();
+		for (String seat : Table.getValidSeat(s, t, "[G-M]")) {
+			cnt1.append(seat.substring(0, 1));
+		}
+		String cnt = cnt1.toString();
+		for (var it : btns.entrySet()) {
+			var key = it.getKey();
+			var btn = it.getValue();
+			var len = cnt.length() - cnt.replace(key, "").length();
+//			var lim = Table.getFaltSeats(key).size();
+			btn.setText(key + " " + (len));
+		}
 	}
 
 }

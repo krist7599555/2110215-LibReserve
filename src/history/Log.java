@@ -1,13 +1,16 @@
 package history;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+/*
+ * Log = Wrapper of JSONObject information
+ * 
+ */
 public class Log {
 	static final SimpleDateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	static final SimpleDateFormat DATEONLYFORMAT = new SimpleDateFormat("yyyy-MM-dd");
@@ -21,31 +24,24 @@ public class Log {
 		return DATEFORMAT.format(new Date());
 	}
 
-//	static String toSimpleDate(String date) {
-//		try {
-//			Calendar c = Calendar.getInstance();
-//			for (int i = -1; i <= 1; ++i) {
-//				c.setTime(DATEFORMAT.parse(now()));
-//				c.add(Calendar.DATE, i);
-//				String newstr = DATEONLYFORMAT.format(c.getTime());
-//				date = date.replace(newstr, i == -1 ? "yesterday" : i == 0 ? "today" : i == 1 ? "tomorrow" : "");
-//			}
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		return date;
-//	}
 	static String toSimpleTime(int tm) {
-		return (tm / 60) + ":" + (tm % 60);
+		return (tm / 60) + ":" + (tm % 60) + (tm % 60 <= 9 ? "0" : "");
 	}
-	
-	
+
+	public Log(String username, int startTime, int endTime, String position) {
+		this.username = username;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.position = position;
+		this.reserveTime = 0;
+	}
+
 	public Log(JSONObject jo) {
 		try {
-			this.username      = jo.has("username")     ? jo.getString("username")     : "NO USER";
-			this.position  = jo.has("position") ? jo.getString("position") : "Z0";
-			this.startTime = jo.has("startTime")? jo.getInt("startTime")   : 0;
-			this.endTime   = jo.has("endTime")  ? jo.getInt("endTime")     : 0;
+			this.username = jo.has("username") ? jo.getString("username") : "NO USER";
+			this.position = jo.has("position") ? jo.getString("position") : "Z0";
+			this.startTime = jo.has("startTime") ? jo.getInt("startTime") : 0;
+			this.endTime = jo.has("endTime") ? jo.getInt("endTime") : 0;
 			this.reserveTime = jo.has("reserveTime") ? jo.getInt("reserveTime") : 0;
 		} catch (JSONException e) {
 			System.err.println("[Error] JSON parse Log.java :" + jo);
@@ -56,41 +52,41 @@ public class Log {
 		return new Log(new JSONObject());
 	}
 
-	String getUser() {
+	public String getUser() {
 		return username;
 	}
 
-	String getZone() {
+	public String getZone() {
 		return position.substring(0, 1);
 	}
 
-	String getSeat() {
+	public String getSeat() {
 		return position.substring(1);
 	}
 
-	String getStartTime() {
+	public String getStartTime() {
 		return toSimpleTime(this.startTime);
 	}
 
-	String getEndTime() {
+	public String getEndTime() {
 		return toSimpleTime(this.endTime);
 	}
 
-	String getReserveTime() {
+	public String getReserveTime() {
 		return toSimpleTime(this.reserveTime);
 	}
 
-	String getPosition() {
+	public String getPosition() {
 		return getZone() + getSeat();
 	}
 
-	String getTitle() {
+	public String getTitle() {
 		return getZone() + getSeat() + " " + getStartTime();
 	}
-	@Override 
+
+	@Override
 	public String toString() {
 		return getUser() + " " + getPosition();
-		
+
 	}
 };
-
