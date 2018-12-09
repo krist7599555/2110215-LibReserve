@@ -4,7 +4,6 @@ import database.Config;
 import database.Store;
 import event.LibReserveEvent;
 import javafx.event.ActionEvent;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -17,9 +16,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-
 /*
  * LoginPane
  * 		handle
@@ -34,11 +30,12 @@ public class LoginPane extends GridPane {
 	private PasswordField pwBox;
 
 	public LoginPane() {
+		this.getStyleClass().add("LoginPane");
 		this.setAlignment(Pos.TOP_CENTER);
 		this.setHgap(10);
 		this.setVgap(10);
 		this.setPadding(new Insets(25, 25, 25, 25));
-		this.setPrefSize(300, 200);
+		this.setPrefWidth(300);
 		initilize();
 		if (Config.AUTO_LOGIN) {
 			userTextField.setText("1");
@@ -51,7 +48,7 @@ public class LoginPane extends GridPane {
 
 		this.getChildren().clear();
 
-		Text scenetitle = new Text("Please Login First.");
+		Label scenetitle = new Label("Please Login First.");
 		this.add(scenetitle, 0, 0, 2, 1);
 
 		Label userName = new Label("User Name:");
@@ -65,15 +62,20 @@ public class LoginPane extends GridPane {
 		this.add(pw, 0, 2);
 
 		pwBox = new PasswordField();
-		this.add(pwBox, 1, 2);
 		pwBox.setPromptText("8 - 16 characters");
+		this.add(pwBox, 1, 2);
+		
+		userTextField.getStyleClass().add("input");
+		pwBox.getStyleClass().add("input");
 
 		HBox hbBtn = new HBox(10);
 		hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
 		Button signinBtn = new Button("Sign in");
-		signinBtn.setPrefWidth(75);
 		Button clearBtn = new Button("Clear");
-		clearBtn.setPrefWidth(75);
+		
+		signinBtn.getStyleClass().add("button");
+		hbBtn.getStyleClass().add("button");
+		
 		hbBtn.getChildren().addAll(signinBtn, clearBtn);
 		this.add(hbBtn, 1, 4);
 
@@ -135,10 +137,12 @@ public class LoginPane extends GridPane {
 		success.setPrefWidth(300);
 		this.add(new Label("Welcome, " + username + "."), 0, 1, 2, 1);
 		HBox bottonPane = new HBox(10);
+		
 		Button signoutBtn = new Button("Sign out");
-		signoutBtn.setPrefWidth(75);
+		signoutBtn.getStyleClass().addAll("button", "is-space");
 		Button historyBtn = new Button("History");
-		historyBtn.setPrefWidth(75);
+		historyBtn.getStyleClass().addAll("button", "is-space");
+		
 		bottonPane.getChildren().addAll(historyBtn, signoutBtn);
 		this.add(bottonPane, 1, 2);
 		bottonPane.setAlignment(Pos.BOTTOM_RIGHT);

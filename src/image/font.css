@@ -1,0 +1,32 @@
+@font-face {
+    font-family: ChulaNew;
+    font-weight: normal;
+    src: url(./chulalongkornreg-webfont.woff2);
+}
+@font-face {
+    font-family: ChulaNew;
+    font-weight: bold;
+    src: url(./chulalongkornbold-webfont.woff2)
+}
+@font-face {
+    font-family: ChulaCha;
+    font-weight: normal;
+    src: url(./chulacharasnewreg-webfont.woff2);
+}
+@font-face {
+    font-family: ChulaCha;
+    font-weight: bold;
+    src: url(./chulacharasnewbold-webfont.woff2);
+}
+.chula-nw {
+    font-family: ChulaNew !important;
+}
+.chula-ch {
+    font-family: ChulaCha;
+}
+.fbold {
+    font-weight: bold;
+}
+.fnormal {
+    font-weight: normal;
+}

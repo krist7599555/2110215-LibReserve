@@ -3,7 +3,8 @@ package application;
 import database.Store;
 import event.LibReserveEvent;
 import history.History;
-import history.UserHistory;
+import history.Log;
+import history.ReservePane;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -182,17 +183,16 @@ public class PositionSelector extends VBox {
 	}
 
 	private VBox getTable(String seat) {
-		var reservePane = new ReservePane(seat, timePicker);
 		var historyPane = new History(seat);
 		historyPane.addEventHandler(LibReserveEvent.UPDATE_LOG, e -> {
 			historyPane.initialize();
-			reservePane.initialize();
 		});
-		reservePane.addEventHandler(LibReserveEvent.UPDATE_LOG, e -> {
-			historyPane.initialize();
-			reservePane.initialize();
+		historyPane.addEventHandler(LibReserveEvent.FOCUS_LOG, e -> {
+			Log log = (Log) e.getParam();
+			timePicker.setLow((long) log.startTime);
+			timePicker.setHigh((long) log.endTime);
 		});
-		return new VBox(historyPane, reservePane);
+		return new VBox(historyPane);
 
 	}
 

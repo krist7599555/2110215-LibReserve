@@ -1,10 +1,11 @@
-package application;
+package history;
 
+import application.TimeIntervalUpdate;
+import application.TimePicker;
 import database.Database;
 import database.Store;
 import database.Table;
 import event.LibReserveEvent;
-import history.Log;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -29,24 +30,31 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 	int s;
 	int t;
 	String seat;
-
-	ReservePane(String seat, TimePicker time) {
+	ReservePane() {
+		this("Z", 0, 0);
+	}
+	ReservePane(String seat, int s, int t) {
 		this.seat = seat;
-		this.s = (int) time.lowTime;
-		this.t = (int) time.highTime;
+		this.s = s;
+		this.t = t;
+		this.setSpacing(19);
+		this.setAlignment(Pos.CENTER);
+		this.setPrefHeight(100);
 		initialize();
 	}
-
+	private Log getLog() {
+		return new Log(Store.isLogin() ? Store.getUsername() : "[NOT LOGIN]", s, t, seat);
+	}
 	public void initialize() {
 		this.getChildren().clear();
-		Log log = new Log(Store.isLogin() ? Store.getUsername() : "[NOT LOGIN]", s, t, seat);
-		this.setAlignment(Pos.CENTER);
+		Log log = getLog();
 		VBox vb = new VBox();
+		vb.setAlignment(Pos.CENTER);
 		vb.getChildren().addAll(new Label("username: " + log.username), new Label("position: " + log.getPosition()),
 				new Label("time start: " + log.getStartTime()), new Label("time end: " + log.getEndTime()),
 				new Label("duration: " + (log.endTime - log.startTime) + " minute"));
-		this.setSpacing(19);
-		this.getChildren().addAll(submitBtn = new Button("reserve"), vb);
+		
+		submitBtn = new Button("reserve");
 		submitBtn.getStyleClass().add("reserve-btn");
 		submitBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			if (Store.isLogin()) {
@@ -59,18 +67,26 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 				alrt.show();
 			}
 		});
+				
 		if (Table.isValidSeat(log.startTime, log.endTime, log.position)) {
 			submitBtn.setDisable(false);
 		} else {
 			submitBtn.setDisable(true);
 			submitBtn.getStyleClass().add("is-disabled");
 		}
+		
+		this.getChildren().addAll(submitBtn, vb);
 	}
 
 	@Override
 	public void intervalUpdate(long s, long t) {
 		this.s = (int) s;
 		this.t = (int) t;
+		initialize();
+	}
+	
+	public void setSeat(String seat) {
+		this.seat = seat;
 		initialize();
 	}
 
