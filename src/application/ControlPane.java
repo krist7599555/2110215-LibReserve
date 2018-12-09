@@ -53,7 +53,7 @@ public class ControlPane extends VBox {
 				stage.show();
 			}
 		});
-		VBox.setMargin(mapBtn, new Insets(10));
+		mapBtnPane.setPadding(new Insets(10));
 		this.getChildren().add(mapBtnPane);
 
 		LoginPane loginPane = new LoginPane();
