@@ -1,10 +1,9 @@
 package application;
 
+import database.Table;
+import event.LibReserveEvent;
 import java.util.HashMap;
 import java.util.Map;
-
-import database.Pwd;
-import event.LibReserveEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -14,7 +13,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.TextAlignment;
 
-public class FirstFl extends Pane {
+/*
+ * FirstFl = Button pane represent 1st floor
+ * 		- RegionButton as helper class
+ */
+public class FirstFl extends Pane implements TimeIntervalUpdate {
 
 	Map<String, RegionButton> btns;
 
@@ -32,7 +35,7 @@ public class FirstFl extends Pane {
 		RegionButton zoneD = new RegionButton("D", 140, 70, 35, 280);
 		RegionButton zoneE = new RegionButton("E", 182, 42, 518, 308);
 		RegionButton zoneF = new RegionButton("F", 70, 210, 35, 70);
-		
+
 		ladder.setTextAlignment(TextAlignment.CENTER);
 		Label label = new Label("Libraian Room");
 		label.setRotate(-90);
@@ -75,6 +78,22 @@ public class FirstFl extends Pane {
 			});
 		}
 
+	}
+
+	@Override
+	public void intervalUpdate(long s, long t) {
+		StringBuilder cnt1 = new StringBuilder();
+		for (String seat : Table.getValidSeat(s, t, "[A-F]")) {
+			cnt1.append(seat.substring(0, 1));
+		}
+		String cnt = cnt1.toString();
+		for (var it : btns.entrySet()) {
+			var key = it.getKey();
+			var btn = it.getValue();
+			var len = cnt.length() - cnt.replace(key, "").length();
+			var lim = Table.getFaltSeats(key).size();
+			btn.setText(key + " " + (len));
+		}
 	}
 
 }

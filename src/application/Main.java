@@ -8,27 +8,32 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+/*
+ * MAIN class for control
+ * 
+ * 	1.) left  - PositionSelector
+ *  2.) right - ControlPane
+ */
 public class Main extends Application {
+
+	PositionSelector positionSelector;
+	ControlPane ctrlPane;
 
 	@Override
 	public void start(Stage primaryStage) {
 		GridPane root = new GridPane();
-		PositionSelector positionSelector = new PositionSelector(Config.STARTER_PATH);
-		root.add(positionSelector, 0, 0);
-	
-		ControlPane ctrlPane = new ControlPane();
-		root.add(ctrlPane, 2, 0);
-		
-		ctrlPane.addEventHandler(LibReserveEvent.NAVIGATE, e -> {
-			String s = (String) e.getParam();
-			positionSelector.setNavigate(s);
-		});
-		
+		root.add(positionSelector = new PositionSelector(Config.STARTER_PATH), 0, 0);
+		root.add(ctrlPane = new ControlPane(), 2, 0);
+
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(Pwd.file + "/application/style.css");
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
+
+		ctrlPane.addEventHandler(LibReserveEvent.UPDATE_ROUTE, e -> {
+			positionSelector.setNavigate((String) e.getParam());
+		});
 	}
 
 	public static void main(String[] args) {

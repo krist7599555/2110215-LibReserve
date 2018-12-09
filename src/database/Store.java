@@ -1,8 +1,10 @@
 package database;
 
-public class Store {
 
-	// AUTHENTICATION
+/*
+ * Store = Authenticate logic and memoi state
+ */
+public class Store {
 
 	private static boolean _isLogin = false;
 	private static String _username = null;

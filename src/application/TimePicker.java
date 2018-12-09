@@ -9,6 +9,10 @@ import org.controlsfx.control.RangeSlider;
 
 import event.LibReserveEvent;
 
+
+/*
+ * TimePicker = simple time interval selection (controlsfx)
+ */
 public class TimePicker extends HBox {
 
 	long lowTime, highTime;
@@ -32,6 +36,7 @@ public class TimePicker extends HBox {
 			this.getChildren().addAll(lowLabel, slider, highLabel);
 		}
 	}
+
 	public TimePicker() {
 		super();
 		this.setAlignment(Pos.CENTER);
@@ -39,13 +44,12 @@ public class TimePicker extends HBox {
 		this.highTime = roundMinute(850);
 		this.lowLabel = new Label(minute2str(lowTime));
 		this.highLabel = new Label(minute2str(highTime));
+
 		slider = new RangeSlider(480, 1200, lowTime, highTime);
 		slider.setPadding(new Insets(15));
 		slider.setLowValue(this.lowTime);
 		slider.setHighValue(this.highTime);
-		
 		slider.setPrefSize(500, 100);
-		
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);
 		slider.setBlockIncrement(120);
@@ -62,16 +66,15 @@ public class TimePicker extends HBox {
 				return minute2str(object.longValue());
 			}
 		});
-
 		slider.lowValueProperty().addListener((observable, oldValue, newValue) -> {
-			this.lowLabel.setText(minute2str(this.highTime = roundMinute(newValue.longValue())));
+			this.lowLabel.setText(minute2str(this.lowTime = roundMinute(newValue.longValue())));
 			this.fireEvent(new LibReserveEvent(LibReserveEvent.INPUT_CHANGE, this));
 		});
 		slider.highValueProperty().addListener((observable, oldValue, newValue) -> {
-			this.highLabel.setText(minute2str(this.lowTime = roundMinute(newValue.longValue())));
+			this.highLabel.setText(minute2str(this.highTime = roundMinute(newValue.longValue())));
 			this.fireEvent(new LibReserveEvent(LibReserveEvent.INPUT_CHANGE, this));
 		});
-		
+
 		this.getChildren().addAll(slider);
 	}
 

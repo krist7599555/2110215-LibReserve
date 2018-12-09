@@ -20,12 +20,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/*
+ * LoginPane
+ * 		handle
+ * 			- login  request (Store.login)
+ * 			- logout request (Store.logout)
+ */
+
 public class LoginPane extends GridPane {
 
 	private String username, password;
 	private TextField userTextField;
 	private PasswordField pwBox;
-	
 
 	public LoginPane() {
 		this.setAlignment(Pos.TOP_CENTER);
@@ -86,8 +92,13 @@ public class LoginPane extends GridPane {
 			pwBox.setText("");
 		});
 
+		if (Config.AUTO_LOGIN) {
+			userTextField.setText("1");
+			pwBox.setText("1");
+		}
+
 	}
-	
+
 	private boolean tryLogin() {
 		userTextField.setDisable(true);
 		pwBox.setDisable(true);
@@ -95,11 +106,13 @@ public class LoginPane extends GridPane {
 		password = pwBox.getText();
 
 		if (Store.login(username, password)) {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Login Successful!");
-			alert.setHeaderText("Login Successful!");
-			alert.setContentText("Welcome, " + username + ".");
-			alert.showAndWait();
+			if (!Config.AUTO_LOGIN) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Login Successful!");
+				alert.setHeaderText("Login Successful!");
+				alert.setContentText("Welcome, " + username + ".");
+				alert.showAndWait();
+			}
 			loginHandle();
 			return true;
 		} else {
@@ -124,13 +137,12 @@ public class LoginPane extends GridPane {
 		HBox bottonPane = new HBox(10);
 		Button signoutBtn = new Button("Sign out");
 		signoutBtn.setPrefWidth(75);
-		this.add(bottonPane, 1, 2);
-		LoginPane.setHalignment(bottonPane, HPos.RIGHT);
-		Button profileBtn = new Button("Reserve History");
-		bottonPane.getChildren().addAll(profileBtn, signoutBtn);
-		
-		profileBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			fireEvent(new LibReserveEvent(LibReserveEvent.NAVIGATE, "/root/history"));
+		Button historyBtn = new Button("History");
+		historyBtn.setPrefWidth(75);
+		this.add(new HBox(historyBtn, signoutBtn), 1, 2);
+		LoginPane.setHalignment(signoutBtn, HPos.RIGHT);
+		historyBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+			this.fireEvent(new LibReserveEvent(LibReserveEvent.UPDATE_ROUTE, "/root/history"));
 		});
 		signoutBtn.addEventHandler(ActionEvent.ANY, e -> {
 			Store.logout();

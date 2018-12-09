@@ -1,53 +1,136 @@
 package database;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+/*
+ * Database 
+ * 		= middleware to connected with server
+ * 		
+ * 		GET /add 		= add new record
+ * 		GET /remove 	= remove record
+ * 		GET /table		= return records base on filtering
+ * 
+ */
 public class Database {
 	static private JSONObject reserve;
 
 	static {
+		initialize();
+	}
+
+	public static void initialize() {
 		try {
-			Database.reserve = new JSONObject(
-					new String(Files.readAllBytes(Paths.get(Pwd.root + "/database/reserve.json"))));
+			var table = Axios.GET("http://128.199.216.159:3721/table");
+			Database.reserve = new JSONObject(table.getData());
 		} catch (Exception e) {
-			System.err.println("error on static database");
+			System.err.println("[Error] Parse Json Error Database.java");
 			e.printStackTrace();
 		}
 	}
 
-	public static ArrayList<JSONObject> getPositionRecord(String key) {
-		ArrayList<JSONObject> res = new ArrayList<JSONObject>();
-		try {
-			JSONObject pos = reserve.getJSONObject(key);
-			JSONArray rec = pos.getJSONArray("records");
-			for (int i = 0; i < rec.length(); ++i) {
-				res.add(rec.getJSONObject(i));
+	public static ArrayList<?> toArrayList(JSONArray arr) {
+		ArrayList<Object> res = new ArrayList<>();
+		for (int i = 0; i < arr.length(); ++i) {
+			try {
+				res.add(arr.get(i));
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-		} catch (JSONException e) {}
+		}
 		return res;
 	}
-	
-//	public static ArrayList<JSONObject> getUserRecord(String key) {
-//		ArrayList<JSONObject> res = new ArrayList<JSONObject>();
-//		try {
-//			JSONObject pos = reserve.getJSONObject(key);
-//			JSONArray rec = pos.getJSONArray("records");
-//			for (int i = 0; i < rec.length(); ++i) {
-//				if (true) {
-//					res.add(rec.getJSONObject(i));
-//				}
-//			}
-//		} catch (JSONException e) {}
-//		return res;
-//	}
-	
-	public static void main(String[] args) {
-		System.out.println("HELLO");
+
+	@SuppressWarnings("unchecked")
+	public static ArrayList<JSONObject> getPositionRecordFULL(String key) {
+		AxiosResponse table = Axios.GET("http://128.199.216.159:3721/table/" + key);
+		JSONArray arr;
+		try {
+			arr = new JSONArray(table.getData());
+		} catch (JSONException e) {
+			arr = new JSONArray();
+			e.printStackTrace();
+		}
+		return sortByStartTime((ArrayList<JSONObject>) toArrayList(arr));
 	}
+
+	public static ArrayList<JSONObject> sortByStartTime(ArrayList<JSONObject> arr) {
+		arr.sort((l, r) -> {
+			try {
+				int ltm = l.getInt("startTime");
+				int rtm = r.getInt("startTime");
+				return ltm - rtm;
+			} catch (JSONException e) {
+				return 0;
+			}
+		});
+		return arr;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static ArrayList<JSONObject> getHistory(String username) {
+		AxiosResponse table = Axios.GET("http://128.199.216.159:3721/history/" + username);
+		JSONArray arr;
+		try {
+			arr = new JSONArray(table.getData());
+		} catch (JSONException e) {
+			arr = new JSONArray();
+			e.printStackTrace();
+		}
+		return sortByStartTime((ArrayList<JSONObject>) toArrayList(arr));
+	}
+
+	public static ArrayList<JSONObject> getPositionRecord(String key) {
+		ArrayList<JSONObject> res = new ArrayList<>();
+		if (!reserve.has(key))
+			return res;
+		try {
+			JSONArray arr = reserve.getJSONArray(key);
+			for (int i = 0; i < arr.length(); ++i) {
+				res.add(arr.getJSONObject(i));
+			}
+		} catch (JSONException e) {
+			System.err.println("[Error] Parse Json Error in getPositionRecord in Database.java");
+			e.printStackTrace();
+		}
+		return sortByStartTime(res);
+	}
+
+	public static boolean add(String username, int startTime, int endTime, String position) {
+		String queryStr = new StringBuilder().append("?username=" + username).append("&startTime=" + startTime)
+				.append("&endTime=" + endTime).append("&position=" + position).toString();
+		String url = "http://128.199.216.159:3721/add" + queryStr;
+		var res = Axios.GET(url);
+		if (!res.isOK()) {
+			System.err.println(res + " GET " + url);
+		} else {
+			System.out.println(res + " GET " + url);
+		}
+		refresh();
+		return res.isOK();
+	}
+
+	public static boolean remove(String username, int startTime, int endTime, String position) {
+		String queryStr = new StringBuilder().append("?username=" + username).append("&startTime=" + startTime)
+				.append("&endTime=" + endTime).append("&position=" + position).toString();
+		String url = "http://128.199.216.159:3721/remove" + queryStr;
+		var res = Axios.GET(url);
+		if (!res.isOK()) {
+			System.err.println(res + " GET " + url);
+		} else {
+			System.out.println(res + " GET " + url);
+		}
+		refresh();
+		return res.isOK();
+	}
+
+	static void refresh() {
+		Database.initialize();
+		Table.initialize();
+	}
+
 }
