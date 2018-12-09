@@ -13,6 +13,10 @@ public class RegionButton extends Button {
 		this.setLayoutX(posX);
 		this.setLayoutY(posY);
 		this.setDisable(isDisabled);
+		this.getStyleClass().add("zone-region");
+		if (isDisabled) {
+			this.getStyleClass().add("is-disabled");
+		}
 	}
 
 	public RegionButton(String text, double sizeX, double sizeY, double posX, double posY) {

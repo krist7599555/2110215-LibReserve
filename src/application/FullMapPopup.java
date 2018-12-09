@@ -27,8 +27,12 @@ public class FullMapPopup {
 		secondFlL.setStyle("-fx-font-size: 20px; -fx-font-weight:bold");
 		secondFlL.setAlignment(Pos.CENTER_RIGHT);
 		
-		ImageView firstFl = new ImageView(new Image("file:res/images/firstFl.png"));
-		ImageView secondFl = new ImageView(new Image("file:res/images/secondFl.png"));
+		var fl1 = FullMapPopup.class.getClassLoader().getResource("image/firstFl.png");
+		var fl2 = FullMapPopup.class.getClassLoader().getResource("image/firstFl.png");
+		
+		ImageView firstFl = new ImageView(new Image("file:" + fl1.getFile()));
+		ImageView secondFl = new ImageView(new Image("file:" + fl2.getFile()));
+		
 		fullMap.getChildren().addAll(secondFlL, secondFl, firstFlL, firstFl);
 		Scene mapScene = new Scene(fullMap, 620, 700);
 		

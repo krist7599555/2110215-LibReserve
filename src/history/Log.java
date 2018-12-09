@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import database.Config;
 
-
 /*
  * Log = Wrapper of JSONObject information
  * 
@@ -26,17 +25,19 @@ public class Log {
 	public static String getNowTime() {
 		return TIMEFORMAT.format(Config.DATE_TIME);
 	}
+
 	public static String getNowDate() {
 		return DATEFORMAT.format(Config.DATE_TIME);
 	}
+
 	public static String getNowDateTime() {
 		return DATETIMEFORMAT.format(Config.DATE_TIME);
 	}
+
 	public static long getNowTimeMinute() {
 		String[] s = getNowTime().split(":");
 		return Integer.valueOf(s[0]) * 60 + Integer.valueOf(s[1]);
 	}
-	
 
 	static String toSimpleTime(int tm) {
 		return (tm / 60) + ":" + (tm % 60) + (tm % 60 <= 9 ? "0" : "");
@@ -100,7 +101,10 @@ public class Log {
 
 	@Override
 	public String toString() {
-		return getUser() + " " + getPosition();
+		return "LOG: " + getUser() + " " + getPosition() + " " + getStartTime() + " " + getEndTime();
+	}
 
+	public boolean equals(Log log) {
+		return log != null && toString().equals(log.toString());
 	}
 };

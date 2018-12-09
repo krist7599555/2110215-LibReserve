@@ -46,12 +46,12 @@ public class FirstFl extends Pane implements TimeIntervalUpdate {
 		EE.setPrefSize(49, 42);
 		EE.setLayoutX(409.5);
 		EE.setLayoutY(0);
-		EE.getStyleClass().addAll("zone-region", "is-disabled");
 
 		Label enthbooks = new Label("English Books and Thai Books");
 		enthbooks.setRotate(-90);
 		enthbooks.setPrefSize(350, 35);
 		enthbooks.setAlignment(Pos.CENTER);
+		
 		HBox labelPane = new HBox();
 		labelPane.setPrefSize(35, 350);
 		labelPane.setLayoutX(0);
@@ -72,7 +72,6 @@ public class FirstFl extends Pane implements TimeIntervalUpdate {
 		btns.put("F", zoneF);
 		for (var i : btns.entrySet()) {
 			Button btn = i.getValue();
-			btn.getStyleClass().add("zone-region");
 			btn.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
 				this.fireEvent(new LibReserveEvent(LibReserveEvent.SELECTED, i.getKey()));
 			});

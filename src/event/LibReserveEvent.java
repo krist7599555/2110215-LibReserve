@@ -18,6 +18,10 @@ public class LibReserveEvent extends Event {
 	public static final EventType<LibReserveEvent> SELECTED = new EventType<>(CUSTOM_EVENT_TYPE, "Selected");
 	public static final EventType<LibReserveEvent> UPDATE_ROUTE = new EventType<>(CUSTOM_EVENT_TYPE, "updateRoute");
 	public static final EventType<LibReserveEvent> NAVIGATE_BACK = new EventType<>(CUSTOM_EVENT_TYPE, "navigateBack");
+	
+	public static final EventType<LibReserveEvent> AUNTH_CHANGE = new EventType<>(CUSTOM_EVENT_TYPE, "Login");
+	public static final EventType<LibReserveEvent> LOGIN = new EventType<>(AUNTH_CHANGE, "Login");
+	public static final EventType<LibReserveEvent> LOGOUT = new EventType<>(AUNTH_CHANGE, "Logout");
 
 	Object param;
 
