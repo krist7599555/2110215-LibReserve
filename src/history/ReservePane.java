@@ -97,10 +97,10 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 		GridPane res = new GridPane();
 		res.setHgap(5);
 		res.setVgap(10);
-		res.add(new Label("username"), 1, 1);
-		res.add(new Label("position"), 1, 2);
-		res.add(new Label("startTime"), 1, 3);
-		res.add(new Label("endTime"), 1, 4);
+		res.add(new Label("Username"), 1, 1);
+		res.add(new Label("Position"), 1, 2);
+		res.add(new Label("StartTime"), 1, 3);
+		res.add(new Label("EndTime"), 1, 4);
 		res.add(new Label(log.getUser()), 2, 1);
 		res.add(new Label(log.getPosition()), 2, 2);
 		res.add(new Label(log.getStartTime()), 2, 3);
