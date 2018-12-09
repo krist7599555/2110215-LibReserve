@@ -4,7 +4,6 @@ import database.Store;
 import event.LibReserveEvent;
 import history.History;
 import history.Log;
-import history.ReservePane;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -38,11 +37,11 @@ public class PositionSelector extends VBox {
 
 	String path;
 	HBox navigate;
-	TimePicker timePicker;
 	HBox floorSelector;
-	Button fl1btn, fl2btn;
-	ObservableList<? extends Node> navigatelist;
-
+	TimePicker timePicker;
+	Button fl1btn;
+	Button fl2btn;
+	
 	int currentFloor = 1;
 
 	public PositionSelector(String path) {
@@ -63,10 +62,10 @@ public class PositionSelector extends VBox {
 		floorSelector = new HBox(10);
 		floorSelector.setPrefWidth(700);
 		floorSelector.setAlignment(Pos.CENTER);
-		Button fl1btn = new Button("Floor 1");
+		fl1btn = new Button("Floor 1");
 		fl1btn.getStyleClass().addAll("floor-btn", "left");
 		fl1btn.getStyleClass().add("is-active");
-		Button fl2btn = new Button("Floor 2");
+		fl2btn = new Button("Floor 2");
 		fl2btn.getStyleClass().addAll("floor-btn", "right");
 
 		floorSelector.getChildren().addAll(fl1btn, fl2btn);
@@ -104,13 +103,14 @@ public class PositionSelector extends VBox {
 	 */
 	void setNavigate(String nav) {
 		this.path = nav;
-		var child = navigate.getChildren();
 		String back = STD.back(nav.split("/"));
+		var child = navigate.getChildren();
 		child.clear();
 		int level = 0;
 
 		if (nav.matches("/root.*")) {
 			Label root = new Label("root");
+			root.getStyleClass().add("nav-link");
 			navigate.getChildren().add(new Label(" / "));
 			navigate.getChildren().add(root);
 			root.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
@@ -121,23 +121,28 @@ public class PositionSelector extends VBox {
 		}
 		if (nav.matches("/root/[A-Z]") || nav.matches("/root/[A-Z]/[A-Z][0-9]+")) {
 			Label zoneLabel = new Label(back.substring(0, 1));
+			zoneLabel.getStyleClass().add("nav-link");
 			navigate.getChildren().add(new Label(" / "));
 			navigate.getChildren().add(zoneLabel);
 			zoneLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-				this.setNavigate("/root/" + back);
+				this.setNavigate("/root/" + back.substring(0, 1));
 			});
 			level |= 2;
 			currentMiddleBox = getZone(back);
 		}
 		if (nav.matches("/root/[A-Z]/[A-Z][0-9]+")) {
+			Label seatLabel = new Label(back);
+			seatLabel.getStyleClass().add("nav-link");
 			navigate.getChildren().add(new Label(" / "));
-			navigate.getChildren().add(new Label(back));
+			navigate.getChildren().add(seatLabel);
 			level |= 4;
 			currentMiddleBox = getTable(back);
 		}
 		if (nav.matches("/root/history")) {
+			Label historyLabel = new Label("history");
+			historyLabel.getStyleClass().add("nav-link");
 			navigate.getChildren().add(new Label(" / "));
-			navigate.getChildren().add(new Label("history"));
+			navigate.getChildren().add(historyLabel);
 			level |= 8;
 			currentMiddleBox = getHistory();
 		}

@@ -30,9 +30,8 @@ class RightDetail extends VBox {
 	RightDetail() {
 		super();
 		this.setSpacing(10);
-		this.setPrefWidth(200);
-		this.setPrefHeight(200);
 		this.setAlignment(Pos.CENTER);
+		this.getStyleClass().addAll("RightDetail");
 		set();
 	}
 	RightDetail(Log log) {
@@ -50,22 +49,26 @@ class RightDetail extends VBox {
 	public void set(Log log) {
 		this.log = log;
 		this.getChildren().clear();
-		this.getStyleClass().addAll("zone-region");
 		
 		this.getChildren().add(new Label(log.getUser() + " (" + log.getPosition() + ")"));
 		this.getChildren().add(new Label(log.getStartTime() + "-" + log.getEndTime()));
-		this.getChildren().add(new Label("reserve at " + log.getReserveTime()));
+//		this.getChildren().add(new Label("reserve at " + log.getReserveTime()));
 
 		final HBox btns = new HBox(5);
+		
+		cancelReserve = new Button("Cancel Reserve");
+		btns.getChildren().add(cancelReserve);
+		cancelReserve.getStyleClass().add("button");
+		cancelReserve.getStyleClass().add("cancelReserve-btn");
 		if (allowcancel()) {
-			cancelReserve = new Button("Cancel Reserve");
-			cancelReserve.getStyleClass().add("cancelReserve-btn");
 			cancelReserve.setOnAction(e -> {
 				Database.remove(Store.getUsername(), log.startTime, log.endTime, log.position);
 				fireEvent(new LibReserveEvent(LibReserveEvent.DELETE_LOG, log));
 				set();
 			});
-			btns.getChildren().add(cancelReserve);
+		} else {
+			cancelReserve.setDisable(true);
+			cancelReserve.getStyleClass().add("is-disabled");
 		}
 
 		btns.setAlignment(Pos.CENTER);

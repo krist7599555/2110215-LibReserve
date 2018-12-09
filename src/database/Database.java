@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import exception.NotLoginException;
+
 
 /*
  * Database 
@@ -100,7 +102,8 @@ public class Database {
 		return sortByStartTime(res);
 	}
 
-	public static boolean add(String username, int startTime, int endTime, String position) {
+	public static boolean add(String username, int startTime, int endTime, String position) throws NotLoginException {
+		if (!Store.isLogin()) throw new NotLoginException();
 		String queryStr = new StringBuilder().append("?username=" + username).append("&startTime=" + startTime)
 				.append("&endTime=" + endTime).append("&position=" + position).toString();
 		String url = "http://128.199.216.159:3721/add" + queryStr;

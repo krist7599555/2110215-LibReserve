@@ -57,7 +57,6 @@ public class Axios {
 
 			return new AxiosResponse(code, results.toString());
 		} catch (IOException e) {
-			e.printStackTrace();
 			return new AxiosResponse(400, "Bad request: " + url);
 		}
 	}

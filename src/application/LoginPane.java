@@ -3,7 +3,9 @@ package application;
 import database.Config;
 import database.Store;
 import event.LibReserveEvent;
+import history.History;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -24,6 +26,8 @@ import javafx.scene.layout.HBox;
  */
 
 public class LoginPane extends GridPane {
+	
+	static public TextField GlobalLatestUserTextField;
 
 	private String username, password;
 	private TextField userTextField;
@@ -57,6 +61,7 @@ public class LoginPane extends GridPane {
 		userTextField = new TextField();
 		userTextField.setPromptText("Enter Your Student ID");
 		this.add(userTextField, 1, 1);
+		GlobalLatestUserTextField = userTextField;
 
 		Label pw = new Label("Password:");
 		this.add(pw, 0, 2);
@@ -152,6 +157,8 @@ public class LoginPane extends GridPane {
 		signoutBtn.addEventHandler(ActionEvent.ANY, e -> {
 			Store.logout();
 			initilize();
+			Event.fireEvent(History.latestHistory, new LibReserveEvent(LibReserveEvent.LOGOUT));
 		});
+		Event.fireEvent(History.latestHistory, new LibReserveEvent(LibReserveEvent.LOGIN));
 	}
 }

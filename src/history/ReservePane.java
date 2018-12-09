@@ -1,11 +1,12 @@
 package history;
 
+import application.LoginPane;
 import application.TimeIntervalUpdate;
-import application.TimePicker;
 import database.Database;
 import database.Store;
 import database.Table;
 import event.LibReserveEvent;
+import exception.NotLoginException;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -37,9 +39,10 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 		this.seat = seat;
 		this.s = s;
 		this.t = t;
-		this.setSpacing(19);
+		this.setSpacing(21);
 		this.setAlignment(Pos.CENTER);
-		this.setPrefHeight(100);
+		this.getStyleClass().add("ReservePane");
+		this.getStyleClass().add("notification");
 		initialize();
 	}
 	private Log getLog() {
@@ -50,25 +53,24 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 		Log log = getLog();
 		VBox vb = new VBox();
 		vb.setAlignment(Pos.CENTER);
-		vb.getChildren().addAll(new Label("username: " + log.username), new Label("position: " + log.getPosition()),
-				new Label("time start: " + log.getStartTime()), new Label("time end: " + log.getEndTime()),
-				new Label("duration: " + (log.endTime - log.startTime) + " minute"));
+		vb.getChildren().addAll(getTable());
 		
 		submitBtn = new Button("reserve");
 		submitBtn.getStyleClass().add("reserve-btn");
 		submitBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			if (Store.isLogin()) {
+			try {
 				Database.add(log.username, log.startTime, log.endTime, log.position);
 				fireEvent(new LibReserveEvent(LibReserveEvent.UPDATE_LOG));
-			} else {
+			} catch (NotLoginException err) {
 				Alert alrt = new Alert(AlertType.ERROR, "Please Login First!", ButtonType.CLOSE);
 				alrt.setTitle("Error");
 				alrt.setHeaderText("Cannot Reserve");
 				alrt.show();
+				LoginPane.GlobalLatestUserTextField.requestFocus();
 			}
 		});
 				
-		if (Table.isValidSeat(log.startTime, log.endTime, log.position)) {
+		if (Table.isValidSeat((long) log.startTime, (long) log.endTime, log.position)) {
 			submitBtn.setDisable(false);
 		} else {
 			submitBtn.setDisable(true);
@@ -88,6 +90,22 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 	public void setSeat(String seat) {
 		this.seat = seat;
 		initialize();
+	}
+	
+	public GridPane getTable() {
+		Log log = getLog();
+		GridPane res = new GridPane();
+		res.setHgap(5);
+		res.setVgap(10);
+		res.add(new Label("username"), 1, 1);
+		res.add(new Label("position"), 1, 2);
+		res.add(new Label("startTime"), 1, 3);
+		res.add(new Label("endTime"), 1, 4);
+		res.add(new Label(log.getUser()), 2, 1);
+		res.add(new Label(log.getPosition()), 2, 2);
+		res.add(new Label(log.getStartTime()), 2, 3);
+		res.add(new Label(log.getEndTime()), 2, 4);
+		return res;
 	}
 
 }

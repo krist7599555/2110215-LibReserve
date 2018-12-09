@@ -28,6 +28,8 @@ import javafx.scene.layout.VBox;
  */
 public class History extends GridPane implements TimeIntervalUpdate {
 
+	public static History latestHistory;
+	
 	String position;
 	boolean userlog;
 	
@@ -43,11 +45,15 @@ public class History extends GridPane implements TimeIntervalUpdate {
 
 	public History(String position, boolean userlog) {
 		
+		this.setHgap(20);
+		this.setVgap(20);
+		
 		this.position = position;
 		this.userlog = userlog;
 		this.recordsPane = new Records(() -> userlog ? Database.getHistory(position) : Database.getPositionRecordFULL(position));
 		this.rightDetail = new RightDetail();
 		this.reservePane = new ReservePane();
+		
 		reservePane.setSeat(position);
 		navigateBack = new Button("Go Back");
 		navigateBack.getStyleClass().add("back-btn");
@@ -68,10 +74,14 @@ public class History extends GridPane implements TimeIntervalUpdate {
 
 
 		this.add(recordsPane, 1, 1, 1, 2);
-		this.add(rightDetail, 2, 1, 1, 1);
+		this.add(rightDetail, 2, 1, 2, 1);
 //		this.add(navigateBack, 3, 1, 1, 1);
 		this.add(reservePane, 2, 2, 2, 1);
 		initialize();
+		
+		latestHistory = this;
+		this.addEventHandler(LibReserveEvent.LOGIN, e -> initialize());
+		this.addEventHandler(LibReserveEvent.LOGOUT, e -> initialize());
 	}
 	
 	public void initialize() {
