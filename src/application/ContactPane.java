@@ -10,7 +10,7 @@ public class ContactPane extends VBox {
 		
 		Label location = new Label("Chula Engineering Library");
 		Label position = new Label("3rd and 4th floor, Building 3.");
-		Label phone = new Label("tel: 02-218-6364");
+		Label phone = new Label("Tel. 02-218-6364");
 		
 		setSpacing(6);
 		getStyleClass().add("Contract");
