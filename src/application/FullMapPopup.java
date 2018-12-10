@@ -28,7 +28,7 @@ public class FullMapPopup {
 		secondFlL.setAlignment(Pos.CENTER_RIGHT);
 		
 		var fl1 = FullMapPopup.class.getClassLoader().getResource("image/firstFl.png");
-		var fl2 = FullMapPopup.class.getClassLoader().getResource("image/firstFl.png");
+		var fl2 = FullMapPopup.class.getClassLoader().getResource("image/secondFl.png");
 		
 		ImageView firstFl = new ImageView(new Image("file:" + fl1.getFile()));
 		ImageView secondFl = new ImageView(new Image("file:" + fl2.getFile()));

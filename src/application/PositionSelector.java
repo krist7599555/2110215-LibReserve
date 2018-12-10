@@ -49,6 +49,7 @@ public class PositionSelector extends VBox {
 
 	public PositionSelector() {
 		super(20);
+		this.getStyleClass().add("PositionSelector");
 		this.path = "/root";
 		this.setAlignment(Pos.TOP_CENTER);
 		this.setPrefSize(720, 570);
@@ -179,13 +180,12 @@ public class PositionSelector extends VBox {
 	}
 
 	private VBox getZone(String zone) {
-		return new VBox(new QuietRoom(zone) {
-			@Override
-			void handle(Button btn) {
-				String seat = btn.getText();
-				setNavigate("/root/" + seat.charAt(0) + "/" + seat);
-			}
+		QuietRoom qr = new QuietRoom(zone);
+		qr.addEventHandler(LibReserveEvent.UPDATE_ROUTE, e -> {
+			String path = (String) e.getParam();
+			setNavigate(path);
 		});
+		return new VBox(qr);
 	}
 
 	private VBox getTable(String seat) {

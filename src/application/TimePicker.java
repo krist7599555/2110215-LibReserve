@@ -51,6 +51,7 @@ public class TimePicker extends HBox {
 		this.highLabel = new Label(minute2str(highTime));
 		
 		slider = new RangeSlider(480, 1200, lowTime, highTime);
+		slider.getStyleClass().add("RangeSlider");
 		slider.setPadding(new Insets(15, 25, 0, 25));
 		slider.setLowValue(this.lowTime);
 		slider.setHighValue(this.highTime);

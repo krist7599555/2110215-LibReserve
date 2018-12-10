@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 import java.util.HashMap;
 import database.Table;
+import event.LibReserveEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -12,7 +13,6 @@ import javafx.scene.layout.VBox;
 import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 /*
  * QuietRoom
@@ -64,7 +64,9 @@ public class QuietRoom extends VBox implements TimeIntervalUpdate {
 						btn.getStyleClass().addAll("desk-btn");
 						btn.getStyleClass().addAll("is-danger");
 						btn.setOnMouseClicked(e -> {
-							this.handle(btn);
+							String seat = btn.getText();
+							String path = "/root/" + seat.charAt(0) + "/" + seat;
+							fireEvent(new LibReserveEvent(LibReserveEvent.UPDATE_ROUTE, path));
 						});
 						btns.put(str, btn);
 					}
@@ -81,7 +83,7 @@ public class QuietRoom extends VBox implements TimeIntervalUpdate {
 		this.getChildren().addAll(grid);
 	}
 
-	void handle(Button btn) {
+	static void handle(Button btn) {
 		System.err.println("[Warnning] no button handle in QuietRoom.java : " + btn.getText());
 	}
 
