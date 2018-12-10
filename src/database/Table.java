@@ -133,8 +133,17 @@ public class Table {
 		}
 		return res;
 	}
+	
+	public static int getRequireNumber(String pos) {
+		try {
+			return table.getJSONObject(pos.substring(0, 1)).getInt("require");
+		} catch (JSONException e) {
+			return 5;
+		}
+	}
+	
 	public static boolean isValidSeat(long s, long t, String position) {
-		return getValidSeat(s, t, position).contains(position);
+		return s != t && getValidSeat(s, t, position).contains(position);
 	}
 
 }

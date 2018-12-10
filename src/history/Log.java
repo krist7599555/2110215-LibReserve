@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import database.Config;
+import database.Database;
 
 /*
  * Log = Wrapper of JSONObject information

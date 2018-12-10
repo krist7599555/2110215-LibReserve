@@ -68,7 +68,7 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 				submitBtn.setDisable(false);
 				return;
 			}
-			currentGroupLoginInput = new GroupLoginInput(5, log.position) {
+			currentGroupLoginInput = new GroupLoginInput(Table.getRequireNumber(log.position), log.position) {
 				@Override
 				public void handle() {
 					try {
@@ -84,8 +84,7 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 				}
 			};
 		});
-				
-		if (Table.isValidSeat((long) log.startTime, (long) log.endTime, log.position)) {
+		if (Table.isValidSeat((long) log.startTime, (long) log.endTime, log.position) && log.startTime != log.endTime) {
 			submitBtn.setDisable(false);
 		} else {
 			submitBtn.setDisable(true);

@@ -130,7 +130,7 @@ public abstract class GroupLoginInput {
 	public ArrayList<String> getTeam() {
 		ArrayList<String> res = new ArrayList<>();
 		for (var tf : listInput) {
-			if (!tf.getText().matches("[0-9]+")) {
+			if (!tf.getText().matches("[0-9]{10}")) {
 				res.add(tf.getText());
 			} else {
 				System.out.println("[Error] record " + tf.getText() + " in GroupLoginInput.java is not valid.");
