@@ -42,8 +42,8 @@ public class LoginPane extends GridPane {
 		this.setPrefWidth(300);
 		initilize();
 		if (Config.AUTO_LOGIN) {
-			userTextField.setText("1");
-			pwBox.setText("1");
+			userTextField.setText("1234567890");
+			pwBox.setText("1234567890");
 			tryLogin();
 		}
 	}
@@ -99,11 +99,6 @@ public class LoginPane extends GridPane {
 			pwBox.setText("");
 		});
 
-		if (Config.AUTO_LOGIN) {
-			userTextField.setText("1");
-			pwBox.setText("1");
-		}
-
 	}
 
 	private boolean tryLogin() {
@@ -113,6 +108,7 @@ public class LoginPane extends GridPane {
 		password = pwBox.getText();
 
 		if (Store.login(username, password)) {
+			username = Store.getUsername();
 			if (!Config.AUTO_LOGIN) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Login Successful!");

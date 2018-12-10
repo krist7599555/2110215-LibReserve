@@ -10,11 +10,10 @@ public class Store {
 	private static String _username = null;
 
 	public static boolean login(String username, String password) {
-		if ((username.equals("1") && password.equals("1")) || LoginRequest.login(username, password)) {
+		if (Config.AUTO_LOGIN || LoginRequest.login(username, password)) {
 			Store._username = username;
-			if (username.equals("1")) {
+			if (username.length() == 0)
 				Store._username = "1234567890";
-			}
 			return setLogin(true);
 		} else {
 			Store._username = null;

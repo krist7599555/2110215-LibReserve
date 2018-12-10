@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import database.Config;
 import database.Pwd;
@@ -58,6 +59,9 @@ public abstract class GroupLoginInput {
 			var tf = new TextField();
 			tf.setPromptText("user " + i);
 			tf.getStyleClass().add("input");
+			tf.textProperty().addListener((observable, oldValue, newValue) -> {
+				message.setText("");
+			});
 			listInput.add(tf);
 		}
 		if (Store.isLogin()) {
@@ -93,8 +97,8 @@ public abstract class GroupLoginInput {
 			submit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 				if (isValid()) {
 					handle();
-				} else {
-					message.setText("input format is not valid. please check you student id");
+				} else if (message.getText().length() == 0) {
+					message.setText("invalid request");						
 				}
 			});
 		}
@@ -114,11 +118,24 @@ public abstract class GroupLoginInput {
 	}
 
 	public boolean isValid() {
+		HashSet hh = new HashSet();
 		for (var tf : listInput) {
-			if (!tf.getText().matches("[0-9]+")) {
+			var txt = tf.getText();
+			if (!txt.matches("[0-9]{10}")) {
 				tf.setFocusTraversable(true);
+				if (txt.length() == 0) {
+					message.setText("empty student id");
+				} else {
+					message.setText("\"" + txt + "\" is not valid");
+				}
 				return false;
+			} else {
+				hh.add(txt);
 			}
+		}
+		if (hh.size() != listInput.size()) {
+			message.setText("duplicate element");
+			return false;
 		}
 		return true;
 	}

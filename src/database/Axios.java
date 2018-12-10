@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javafx.scene.control.Alert;
+
 /*
  * AxiosResponse = Helper class for sending request
  * 
@@ -57,7 +59,9 @@ public class Axios {
 
 			return new AxiosResponse(code, results.toString());
 		} catch (IOException e) {
-			return new AxiosResponse(400, "Bad request: " + url);
+			Alert alt = new Alert(Alert.AlertType.ERROR, "No internet connection", null);
+			alt.showAndWait();
+			return new AxiosResponse(999, "No internet connection");
 		}
 	}
 }
