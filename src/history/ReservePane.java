@@ -34,7 +34,7 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 	int t;
 	String seat;
 	ReservePane() {
-		this("Z", 0, 0);
+		this("-", 0, 0);
 	}
 	ReservePane(String seat, int s, int t) {
 		this.seat = seat;
@@ -47,7 +47,7 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 		initialize();
 	}
 	private Log getLog() {
-		return new Log(Store.isLogin() ? Store.getUsername() : "[NOT LOGIN]", s, t, seat);
+		return new Log(Store.isLogin() ? Store.getUsername() : "-", s, t, seat);
 	}
 	public void initialize() {
 		this.getChildren().clear();
@@ -89,11 +89,6 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 		initialize();
 	}
 	
-	public void setSeat(String seat) {
-		this.seat = seat;
-		initialize();
-	}
-	
 	public GridPane getTable() {
 		Log log = getLog();
 		GridPane res = new GridPane();
@@ -108,6 +103,9 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 		res.add(new Label(log.getStartTime()), 2, 3);
 		res.add(new Label(log.getEndTime()), 2, 4);
 		return res;
+	}
+	public void setSeat(String position) {
+		this.seat = position;
 	}
 
 }

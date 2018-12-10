@@ -31,6 +31,7 @@ public class History extends GridPane implements TimeIntervalUpdate {
 	public static History latestHistory;
 	
 	String position;
+	String username;
 	boolean userlog;
 	
 	protected Log currentLog;
@@ -38,22 +39,30 @@ public class History extends GridPane implements TimeIntervalUpdate {
 	protected RightDetail rightDetail;
 	protected ReservePane reservePane;
 
-	public History(String position) {
-		this(position, false);
+	public History(String str) {
+		this(str, false);
 	}
 
-	public History(String position, boolean userlog) {
+	public History(String str, boolean userlog) {
+		
+		if (userlog) {
+			this.username = str;
+			this.position = "-";
+		} else {
+			this.username = "-";
+			this.position = str;
+		}
 		
 		this.setHgap(20);
 		this.setVgap(20);
 		
-		this.position = position;
 		this.userlog = userlog;
-		this.recordsPane = new Records(() -> userlog ? Database.getHistory(position) : Database.getPositionRecordFULL(position));
+		this.recordsPane = new Records(() -> userlog ? Database.getHistory(username) : Database.getPositionRecordFULL(position));
 		this.rightDetail = new RightDetail();
 		this.reservePane = new ReservePane();
 		
 		reservePane.setSeat(position);
+		
 		rightDetail.addEventHandler(LibReserveEvent.DELETE_LOG, e -> {
 			recordsPane.remove((Log) e.getParam());
 			fireEvent(e);

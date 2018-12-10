@@ -42,7 +42,7 @@ public class TimePicker extends HBox {
 		super();
 		this.setAlignment(Pos.CENTER);
 		
-		long mn = Math.min(Math.max(480, Log.getNowTimeMinute()), 1200);
+		long mn = Math.min(Math.max(480, Log.getNowTimeMinute() + 29), 1200);
 		long mx = Math.min(mn + 60, 1200);
 		
 		this.lowTime = roundMinute(mn);
