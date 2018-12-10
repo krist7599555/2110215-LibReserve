@@ -3,27 +3,19 @@ package application;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import database.Config;
 import database.Pwd;
 import database.Store;
-import event.LibReserveEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventTarget;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -62,7 +54,6 @@ public abstract class GroupLoginInput {
 		System.err.println("[Error] Empty Constructure in GroupLoginInput.java");
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void show() {
 		GridPane pane = new GridPane();
 		pane.getStyleClass().add("GroupLoginInput");
@@ -95,7 +86,7 @@ public abstract class GroupLoginInput {
 		pane.add(submit, 2, 4);
 
 		Scene scene = new Scene(pane);
-		scene.getStylesheets().add(Pwd.file + "/application/style.css");
+		scene.getStylesheets().add(this.getClass().getResourceAsStream("/application/style.css").toString());
 
 		stage.setScene(scene);
 		stage.show();
@@ -134,7 +125,7 @@ public abstract class GroupLoginInput {
 	}
 
 	public boolean isValid() {
-		HashSet hh = new HashSet();
+		HashSet<String> hh = new HashSet<>();
 		for (var tf : listInput) {
 			var txt = tf.getText();
 			if (!txt.matches("[0-9]{10}")) {

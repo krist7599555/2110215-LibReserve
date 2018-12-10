@@ -1,7 +1,6 @@
 package history;
 
 import application.GroupLoginInput;
-import application.LoginPane;
 import application.TimeIntervalUpdate;
 import database.Database;
 import database.Store;
@@ -9,12 +8,8 @@ import database.Table;
 import event.LibReserveEvent;
 import exception.HistoryConflictException;
 import exception.LibReserveException;
-import exception.NotLoginException;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -35,7 +30,7 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 	int s;
 	int t;
 	String seat;
-	private GroupLoginInput currentGroupLoginInput;
+//	private GroupLoginInput currentGroupLoginInput;
 
 	ReservePane() {
 		this("-", 0, 0);
@@ -83,7 +78,8 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 				submitBtn.setDisable(false);
 				return;
 			}
-			currentGroupLoginInput = new GroupLoginInput(Table.getRequireNumber(log.position), log.position) {
+//			currentGroupLoginInput = 
+			new GroupLoginInput(Table.getRequireNumber(log.position), log.position) {
 				@Override
 				public void onsuccess() {
 					try {

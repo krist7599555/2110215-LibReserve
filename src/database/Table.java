@@ -19,8 +19,8 @@ import history.Log;
  */
 public class Table {
 	static private JSONObject table;
-	static private ArrayList<String> allseat = new ArrayList<>();
-	static private ArrayList<String> allzone = new ArrayList<>();
+	static private ArrayList<String> allseat;
+	static private ArrayList<String> allzone;
 
 	static {
 		initialize();
@@ -28,7 +28,9 @@ public class Table {
 
 	protected static void initialize() {
 		try {
-			table = new JSONObject(new String(Files.readAllBytes(Paths.get(Pwd.root + "/database/table.json"))));
+			table = new JSONObject(Pwd.getFile("/database/table.json"));
+			allseat = new ArrayList<>();
+			allzone = new ArrayList<>();
 			for (var it = table.keys(); it.hasNext();) {
 				var key = (String) it.next();
 				allzone.add(key);
@@ -41,9 +43,11 @@ public class Table {
 				}
 				allseat.sort((l, r) -> {
 					int len = l.length() - r.length();
-					if (len == 0) return l.compareTo(r);
+					if (len == 0)
+						return l.compareTo(r);
 					int cmp = l.charAt(0) - r.charAt(0);
-					if (cmp != 0) return cmp;
+					if (cmp != 0)
+						return cmp;
 					return len;
 				});
 			}
@@ -52,7 +56,7 @@ public class Table {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void reinitialize() {
 		initialize();
 	}
@@ -88,7 +92,8 @@ public class Table {
 		}
 		return res;
 	}
-	public static ArrayList<String> getFaltSeats(String zone) {
+
+	public static ArrayList<String> getAllSeats(String zone) {
 		ArrayList<String> res = new ArrayList<>();
 		try {
 			JSONArray row = table.getJSONObject(zone).getJSONArray("seat");
@@ -106,7 +111,6 @@ public class Table {
 		}
 		return res;
 	}
-	
 
 	public static ArrayList<String> getValidSeat(long s, long t, String search) {
 		var res = new ArrayList<String>();
@@ -133,7 +137,7 @@ public class Table {
 		}
 		return res;
 	}
-	
+
 	public static int getRequireNumber(String pos) {
 		try {
 			return table.getJSONObject(pos.substring(0, 1)).getInt("require");
@@ -141,7 +145,7 @@ public class Table {
 			return 5;
 		}
 	}
-	
+
 	public static boolean isValidSeat(long s, long t, String position) {
 		return s != t && getValidSeat(s, t, position).contains(position);
 	}

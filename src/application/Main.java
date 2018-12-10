@@ -26,7 +26,7 @@ public class Main extends Application {
 		root.add(ctrlPane = new ControlPane(), 2, 0);
 
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(Pwd.file + "/application/style.css");
+		scene.getStylesheets().add("file:" + Pwd.root() + "/application/style.css");
 		
 		primaryStage.setTitle("Engineering Library");
 		primaryStage.setScene(scene);

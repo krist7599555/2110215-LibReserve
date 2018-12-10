@@ -3,7 +3,6 @@ package history;
 import database.Database;
 import database.Store;
 import event.LibReserveEvent;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

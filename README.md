@@ -8,8 +8,8 @@ Reserving table in Enginner Libraly is quite hard. So, our team think that is wo
 
 ### Author
 
-- Krist Pornpairin
-- Kantorn Jitchuech
+- Krist Pornpairin 6031301721
+- Kantorn Chitchuen 6030038521
 
 ### UML
 

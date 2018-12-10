@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /*
  * AxiosResponse = Helper class for sending request
@@ -59,7 +60,7 @@ public class Axios {
 
 			return new AxiosResponse(code, results.toString());
 		} catch (IOException e) {
-			Alert alt = new Alert(Alert.AlertType.ERROR, "No internet connection", null);
+			Alert alt = new Alert(Alert.AlertType.ERROR, "No internet connection", ButtonType.CLOSE);
 			alt.showAndWait();
 			return new AxiosResponse(999, "No internet connection");
 		}

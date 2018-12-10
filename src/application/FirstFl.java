@@ -90,7 +90,7 @@ public class FirstFl extends Pane implements TimeIntervalUpdate {
 			var key = it.getKey();
 			var btn = it.getValue();
 			var len = cnt.length() - cnt.replace(key, "").length();
-			var lim = Table.getFaltSeats(key).size();
+//			var lim = Table.getAllSeats(key).size();
 			btn.setText(key + " " + (len));
 		}
 	}
