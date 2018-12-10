@@ -36,9 +36,11 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 	int t;
 	String seat;
 	private GroupLoginInput currentGroupLoginInput;
+
 	ReservePane() {
 		this("-", 0, 0);
 	}
+
 	ReservePane(String seat, int s, int t) {
 		this.seat = seat;
 		this.s = s;
@@ -49,18 +51,28 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 		this.getStyleClass().add("notification");
 		initialize();
 	}
+
 	private Log getLog() {
 		return new Log(Store.isLogin() ? Store.getUsername() : "-", s, t, seat);
 	}
+
 	public void initialize() {
 		this.getChildren().clear();
 		Log log = getLog();
 		VBox vb = new VBox();
+
 		vb.setAlignment(Pos.CENTER);
 		vb.getChildren().addAll(getTable());
-		
+
+		Label submitLbl = new Label("* require " + (Table.getRequireNumber(seat) + " people."));
+		if (!Store.isLogin()) {
+			submitLbl.setText("* please login");
+		}
+		submitLbl.getStyleClass().addAll("reserve-label-require", "is-subtitle");
 		submitBtn = new Button("reserve");
-		submitBtn.getStyleClass().add("reserve-btn");
+		submitBtn.setAlignment(Pos.CENTER);
+		submitBtn.getStyleClass().addAll("reserve-btn", "is-title");
+
 		submitBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			submitBtn.setDisable(true);
 			if (Database.isHistoryConflict(log.username, log.startTime, log.endTime)) {
@@ -70,7 +82,7 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 			}
 			currentGroupLoginInput = new GroupLoginInput(Table.getRequireNumber(log.position), log.position) {
 				@Override
-				public void handle() {
+				public void onsuccess() {
 					try {
 						Database.add(log.username, log.startTime, log.endTime, log.position);
 						submitBtn.setDisable(false);
@@ -80,18 +92,29 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 						submitBtn.setDisable(false);
 						err.alert();
 					}
-					
+
+				}
+
+				@Override
+				public void onclose() {
+					submitBtn.setDisable(false);
 				}
 			};
 		});
-		if (Table.isValidSeat((long) log.startTime, (long) log.endTime, log.position) && log.startTime != log.endTime) {
+		if (Store.isLogin() && Table.isValidSeat((long) log.startTime, (long) log.endTime, log.position)
+				&& log.startTime != log.endTime) {
 			submitBtn.setDisable(false);
 		} else {
 			submitBtn.setDisable(true);
 			submitBtn.getStyleClass().add("is-disabled");
 		}
-		
-		this.getChildren().addAll(submitBtn, vb);
+
+		VBox btns = new VBox();
+		btns.setMaxHeight(100);
+		btns.setAlignment(Pos.CENTER);
+		btns.setSpacing(5);
+		btns.getChildren().addAll(submitBtn, submitLbl);
+		this.getChildren().addAll(btns, vb);
 	}
 
 	@Override
@@ -100,10 +123,11 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 		this.t = (int) t;
 		initialize();
 	}
-	
+
 	public GridPane getTable() {
 		Log log = getLog();
 		GridPane res = new GridPane();
+		res.getStyleClass().add("reserve-table");
 		res.setHgap(5);
 		res.setVgap(10);
 		res.add(new Label("Username"), 1, 1);
@@ -116,6 +140,7 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 		res.add(new Label(log.getEndTime()), 2, 4);
 		return res;
 	}
+
 	public void setSeat(String position) {
 		this.seat = position;
 	}

@@ -10,6 +10,6 @@ public class HistoryConflictException extends LibReserveException {
 	}
 	@Override
 	public String tinyMessage() {
-		return "Reserve time is conflict to previus record.\nPlease check your history.";
+		return "Reserve time is conflict to previous record.\nPlease check your history.";
 	}
 }

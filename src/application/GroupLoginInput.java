@@ -6,8 +6,12 @@ import java.util.HashSet;
 import database.Config;
 import database.Pwd;
 import database.Store;
+import event.LibReserveEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventTarget;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -22,6 +26,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /*
  * groupLoginInput = Popup Map View
@@ -36,13 +41,27 @@ public abstract class GroupLoginInput {
 
 	private int require;
 	private String position;
-	
+
 	public GroupLoginInput(int n, String pos) {
 		require = n;
 		position = pos;
 		show();
+		message.getStyleClass().add("help");
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				onclose();
+			}
+		});
 	}
-	
+
+	// public GroupLoginInput() {
+	// // TODO Auto-generated constructor stub
+	// }
+
+	public GroupLoginInput() {
+		System.err.println("[Error] Empty Constructure in GroupLoginInput.java");
+	}
+
 	@SuppressWarnings("unchecked")
 	protected void show() {
 		GridPane pane = new GridPane();
@@ -52,8 +71,6 @@ public abstract class GroupLoginInput {
 		pane.setAlignment(Pos.CENTER);
 		pane.setVgap(10);
 
-		
-		
 		listInput.clear();
 		for (int i = 1; i <= require; ++i) {
 			var tf = new TextField();
@@ -69,14 +86,14 @@ public abstract class GroupLoginInput {
 			tf.setText(Store.getUsername());
 			tf.setDisable(true);
 		}
-		
+
 		setLoginPane();
-		
+
 		pane.add(new Label(position + " require " + require + " people."), 1, 1);
 		pane.add(message, 1, 2, 2, 1);
 		pane.add(middlePane, 1, 3, 2, 1);
 		pane.add(submit, 2, 4);
-		
+
 		Scene scene = new Scene(pane);
 		scene.getStylesheets().add(Pwd.file + "/application/style.css");
 
@@ -84,7 +101,7 @@ public abstract class GroupLoginInput {
 		stage.show();
 
 	}
-	
+
 	private void setLoginPane() {
 		middlePane.getChildren().clear();
 		middlePane.setPrefSize(70, 100);
@@ -92,25 +109,24 @@ public abstract class GroupLoginInput {
 			VBox inps = middlePane;
 			inps.setSpacing(10);
 			inps.getChildren().addAll(listInput);
-			
+
 			submit.getStyleClass().add("button");
 			submit.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 				if (isValid()) {
-					handle();
+					onsuccess();
 				} else if (message.getText().length() == 0) {
-					message.setText("invalid request");						
+					message.setText("invalid request");
 				}
 			});
-		}
-		else {
+		} else {
 			message.setText("please login");
 		}
 	}
-	
+
 	public void refresh() {
 		if (message.getText().length() != 0) {
 			message.setText("");
-			
+
 		}
 		if (Store.isLogin() && listInput.size() == 0) {
 			setLoginPane();
@@ -139,11 +155,11 @@ public abstract class GroupLoginInput {
 		}
 		return true;
 	}
-	
+
 	public void close() {
 		stage.close();
 	}
-	
+
 	public ArrayList<String> getTeam() {
 		ArrayList<String> res = new ArrayList<>();
 		for (var tf : listInput) {
@@ -155,6 +171,8 @@ public abstract class GroupLoginInput {
 		}
 		return res;
 	}
-	
-	public abstract void handle();
+
+	abstract public void onsuccess();
+
+	abstract public void onclose();
 }
