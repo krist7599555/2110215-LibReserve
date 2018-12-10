@@ -68,6 +68,9 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 		if (!Store.isLogin()) {
 			submitLbl.setText("* please login");
 		}
+		if (seat.equals("-")) {
+			submitLbl.setText("* history mode");
+		}
 		submitLbl.getStyleClass().addAll("reserve-label-require", "is-subtitle");
 		submitBtn = new Button("reserve");
 		submitBtn.setAlignment(Pos.CENTER);
