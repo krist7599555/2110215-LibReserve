@@ -4,10 +4,8 @@ import database.Store;
 import event.LibReserveEvent;
 import history.History;
 import history.Log;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -53,7 +51,7 @@ public class PositionSelector extends VBox {
 		super(20);
 		this.path = "/root";
 		this.setAlignment(Pos.TOP_CENTER);
-		this.setPrefSize(700, 600);
+		this.setPrefSize(720, 570);
 
 		navigate = new HBox();
 		navigate.setPadding(new Insets(15, 20, 15, 20));
@@ -98,9 +96,10 @@ public class PositionSelector extends VBox {
 		this.setNavigate("/root");
 	}
 
-	/*
-	 * [1] nav = "" -> /root [2] nav = "A" -> /root/A [3] nav = "A13" -> /root/A/A13
-	 */
+// 	[1] nav = /root 
+//	[2] nav = /root/A 
+// 	[3] nav = /root/A/A13
+//	[4] nav = /root/history
 	void setNavigate(String nav) {
 		this.path = nav;
 		String back = STD.back(nav.split("/"));
@@ -147,17 +146,19 @@ public class PositionSelector extends VBox {
 			currentMiddleBox = getHistory();
 		}
 
-		currentMiddleBox.addEventHandler(LibReserveEvent.NAVIGATE_BACK, e -> this.navigateBack());
+//		For Improving in next version
+//		currentMiddleBox.addEventHandler(LibReserveEvent.NAVIGATE_BACK, e -> this.navigateBack());
 
 		HBox hb = new HBox(currentMiddleBox);
-		hb.setPrefSize(700, 350);
+		hb.setPrefSize(800, 350);
 		hb.setAlignment(Pos.CENTER);
+		
 		this.getChildren().set(1, hb);
 
 		floorSelector.setOpacity(level == 1 || level == 3 ? 1 : 0);
 		timePicker.setOpacity(level == 1 || level == 3 || level == 7 ? 1 : 0);
 
-		// add time interval listener to middleBox
+// 	 	Calling middleBox.each(IntervalUpdate)
 		timeUpdate(); 
 	}
 

@@ -36,7 +36,6 @@ public class History extends GridPane implements TimeIntervalUpdate {
 	protected Log currentLog;
 	protected Records recordsPane;
 	protected RightDetail rightDetail;
-	protected Button navigateBack;
 	protected ReservePane reservePane;
 
 	public History(String position) {
@@ -55,11 +54,6 @@ public class History extends GridPane implements TimeIntervalUpdate {
 		this.reservePane = new ReservePane();
 		
 		reservePane.setSeat(position);
-		navigateBack = new Button("Go Back");
-		navigateBack.getStyleClass().add("back-btn");
-		navigateBack.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			fireEvent(new LibReserveEvent(LibReserveEvent.NAVIGATE_BACK));
-		});
 		rightDetail.addEventHandler(LibReserveEvent.DELETE_LOG, e -> {
 			recordsPane.remove((Log) e.getParam());
 			fireEvent(e);
@@ -75,7 +69,6 @@ public class History extends GridPane implements TimeIntervalUpdate {
 
 		this.add(recordsPane, 1, 1, 1, 2);
 		this.add(rightDetail, 2, 1, 2, 1);
-//		this.add(navigateBack, 3, 1, 1, 1);
 		this.add(reservePane, 2, 2, 2, 1);
 		initialize();
 		

@@ -6,6 +6,7 @@ import database.Database;
 import database.Store;
 import database.Table;
 import event.LibReserveEvent;
+import exception.LibReserveException;
 import exception.NotLoginException;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -61,8 +62,9 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 			try {
 				Database.add(log.username, log.startTime, log.endTime, log.position);
 				fireEvent(new LibReserveEvent(LibReserveEvent.UPDATE_LOG));
-			} catch (NotLoginException err) {
-				Alert alrt = new Alert(AlertType.ERROR, "Please Login First!", ButtonType.CLOSE);
+			} catch (LibReserveException err) {
+				System.err.println(err);
+				Alert alrt = new Alert(AlertType.ERROR, err.tinyMessage(), ButtonType.CLOSE);
 				alrt.setTitle("Error");
 				alrt.setHeaderText("Cannot Reserve");
 				alrt.show();

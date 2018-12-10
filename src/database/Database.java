@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import exception.HistoryConflictException;
 import exception.NotLoginException;
 
 
@@ -85,6 +86,21 @@ public class Database {
 		}
 		return sortByStartTime((ArrayList<JSONObject>) toArrayList(arr));
 	}
+	public static boolean isHistoryConflict(String username, int start, int end) {
+		for (JSONObject log : getHistory(username)) {
+			try {
+				int s = log.getInt("startTime");
+				int t = log.getInt("endTime");
+				if (start < t && s < end) {
+					return true;
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+				System.err.println("[Error] Casting error Database.java /add of " + log);
+			}
+		}
+		return false;
+	}
 
 	public static ArrayList<JSONObject> getPositionRecord(String key) {
 		ArrayList<JSONObject> res = new ArrayList<>();
@@ -102,8 +118,11 @@ public class Database {
 		return sortByStartTime(res);
 	}
 
-	public static boolean add(String username, int startTime, int endTime, String position) throws NotLoginException {
-		if (!Store.isLogin()) throw new NotLoginException();
+	public static boolean add(String username, int startTime, int endTime, String position) throws NotLoginException, HistoryConflictException {
+		if (!Store.isLogin()) throw new NotLoginException("user \"" + username + "\" is not login yet.");
+		if (!Config.ALLOW_MULTI_RESERVE && isHistoryConflict(username, startTime, endTime)) {
+			throw new HistoryConflictException();
+		}
 		String queryStr = new StringBuilder().append("?username=" + username).append("&startTime=" + startTime)
 				.append("&endTime=" + endTime).append("&position=" + position).toString();
 		String url = "http://128.199.216.159:3721/add" + queryStr;
