@@ -1,11 +1,13 @@
 package history;
 
+import application.GroupLoginInput;
 import application.LoginPane;
 import application.TimeIntervalUpdate;
 import database.Database;
 import database.Store;
 import database.Table;
 import event.LibReserveEvent;
+import exception.HistoryConflictException;
 import exception.LibReserveException;
 import exception.NotLoginException;
 import javafx.geometry.Pos;
@@ -33,6 +35,7 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 	int s;
 	int t;
 	String seat;
+	private GroupLoginInput currentGroupLoginInput;
 	ReservePane() {
 		this("-", 0, 0);
 	}
@@ -59,17 +62,27 @@ public class ReservePane extends HBox implements TimeIntervalUpdate {
 		submitBtn = new Button("reserve");
 		submitBtn.getStyleClass().add("reserve-btn");
 		submitBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			try {
-				Database.add(log.username, log.startTime, log.endTime, log.position);
-				fireEvent(new LibReserveEvent(LibReserveEvent.UPDATE_LOG));
-			} catch (LibReserveException err) {
-				System.err.println(err);
-				Alert alrt = new Alert(AlertType.ERROR, err.tinyMessage(), ButtonType.CLOSE);
-				alrt.setTitle("Error");
-				alrt.setHeaderText("Cannot Reserve");
-				alrt.show();
-				LoginPane.GlobalLatestUserTextField.requestFocus();
+			submitBtn.setDisable(true);
+			if (Database.isHistoryConflict(log.username, log.startTime, log.endTime)) {
+				new HistoryConflictException().alert();
+				submitBtn.setDisable(false);
+				return;
 			}
+			currentGroupLoginInput = new GroupLoginInput(5, log.position) {
+				@Override
+				public void handle() {
+					try {
+						Database.add(log.username, log.startTime, log.endTime, log.position);
+						submitBtn.setDisable(false);
+						fireEvent(new LibReserveEvent(LibReserveEvent.UPDATE_LOG));
+						this.close();
+					} catch (LibReserveException err) {
+						submitBtn.setDisable(false);
+						err.alert();
+					}
+					
+				}
+			};
 		});
 				
 		if (Table.isValidSeat((long) log.startTime, (long) log.endTime, log.position)) {

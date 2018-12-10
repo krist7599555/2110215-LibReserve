@@ -279,3 +279,24 @@
 .range-slider .high-thumb:pressed {
   -fx-color: -fx-pressed-base;
 }
+
+.GroupLoginInput {
+  -fx-background-color: rgb(214, 211, 202);
+}
+.GroupLoginInput .input {
+  -fx-text-fill: rgb(62, 50, 47);
+  -fx-pref-width: 75;
+  -fx-padding: 7 7;
+  -fx-background-color: #f4f4f4aa;
+}
+
+.GroupLoginInput .button {
+  -fx-text-fill: #ffffff;
+  -fx-pref-width: 75;
+  -fx-padding: 7 7;
+  -fx-background-color: #6dbb80;
+}
+
+.GroupLoginInput .button:hover {
+  -fx-background-color: #79c28b;
+}

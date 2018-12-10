@@ -27,11 +27,12 @@ public class Database {
 	}
 
 	public static void initialize() {
+		AxiosResponse table = null;
 		try {
-			var table = Axios.GET("http://128.199.216.159:3721/table");
+			table = Axios.GET("http://128.199.216.159:3721/table");
 			Database.reserve = new JSONObject(table.getData());
 		} catch (Exception e) {
-			System.err.println("[Error] Parse Json Error Database.java");
+			System.err.println("[Error] Parse Json Error Database.java : " + table);
 			e.printStackTrace();
 		}
 	}
@@ -87,6 +88,7 @@ public class Database {
 		return sortByStartTime((ArrayList<JSONObject>) toArrayList(arr));
 	}
 	public static boolean isHistoryConflict(String username, int start, int end) {
+		if (Config.ALLOW_MULTI_RESERVE) return true;
 		for (JSONObject log : getHistory(username)) {
 			try {
 				int s = log.getInt("startTime");
@@ -119,8 +121,11 @@ public class Database {
 	}
 
 	public static boolean add(String username, int startTime, int endTime, String position) throws NotLoginException, HistoryConflictException {
+		
+		System.err.println("NEED TO IMPLEMENT GET MEMBER FIELD i /ADD");
+		
 		if (!Store.isLogin()) throw new NotLoginException("user \"" + username + "\" is not login yet.");
-		if (!Config.ALLOW_MULTI_RESERVE && isHistoryConflict(username, startTime, endTime)) {
+		if (isHistoryConflict(username, startTime, endTime)) {
 			throw new HistoryConflictException();
 		}
 		String queryStr = new StringBuilder().append("?username=" + username).append("&startTime=" + startTime)
