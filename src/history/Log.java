@@ -13,9 +13,11 @@ import database.Config;
  * 
  */
 public class Log {
+
 	public static final SimpleDateFormat TIMEFORMAT = new SimpleDateFormat("HH:mm");
 	public static final SimpleDateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	public static final SimpleDateFormat DATETIMEFORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
 	public String username;
 	public String position;
 	public Integer startTime;
@@ -61,10 +63,6 @@ public class Log {
 		} catch (JSONException e) {
 			System.err.println("[Error] JSON parse Log.java :" + jo);
 		}
-	}
-
-	public static Log NONE() {
-		return new Log(new JSONObject());
 	}
 
 	public String getUser() {

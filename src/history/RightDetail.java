@@ -51,8 +51,7 @@ class RightDetail extends VBox {
 		this.getChildren().clear();
 		
 		this.getChildren().add(new Label(log.getUser() + " (" + log.getPosition() + ")"));
-		this.getChildren().add(new Label(log.getStartTime() + "-" + log.getEndTime()));
-//		this.getChildren().add(new Label("reserve at " + log.getReserveTime()));
+		this.getChildren().add(new Label(log.getStartTime() + " - " + log.getEndTime()));
 
 		final HBox btns = new HBox(5);
 		
