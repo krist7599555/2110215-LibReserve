@@ -4,6 +4,8 @@ import database.Table;
 import event.LibReserveEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -70,7 +72,7 @@ public class FirstFl extends Pane implements TimeIntervalUpdate {
 		btns.put("D", zoneD);
 		btns.put("E", zoneE);
 		btns.put("F", zoneF);
-		for (var i : btns.entrySet()) {
+		for (Entry<String, RegionButton> i : btns.entrySet()) {
 			Button btn = i.getValue();
 			btn.addEventHandler(MouseEvent.MOUSE_PRESSED, e -> {
 				this.fireEvent(new LibReserveEvent(LibReserveEvent.SELECTED, i.getKey()));
@@ -86,10 +88,10 @@ public class FirstFl extends Pane implements TimeIntervalUpdate {
 			cnt1.append(seat.substring(0, 1));
 		}
 		String cnt = cnt1.toString();
-		for (var it : btns.entrySet()) {
-			var key = it.getKey();
-			var btn = it.getValue();
-			var len = cnt.length() - cnt.replace(key, "").length();
+		for (Entry<String, RegionButton> it : btns.entrySet()) {
+			String key = it.getKey();
+			RegionButton btn = it.getValue();
+			int len = cnt.length() - cnt.replace(key, "").length();
 //			var lim = Table.getAllSeats(key).size();
 			btn.setText(key + " " + (len));
 		}

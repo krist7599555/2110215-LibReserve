@@ -3,7 +3,6 @@ package application;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import database.Pwd;
 import database.Store;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,5 +1,7 @@
 package application;
 
+import java.net.URL;
+
 import event.LibReserveEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -35,7 +37,7 @@ public class ControlPane extends VBox {
 		mapBtn.getStyleClass().add("map-btn");
 		mapBtn.setAlignment(Pos.CENTER);
 		
-		var logoURL = FullMapPopup.class.getClassLoader().getResource("image/location-on-map.png");
+		URL logoURL = FullMapPopup.class.getClassLoader().getResource("image/location-on-map.png");
 		ImageView mapLogo = new ImageView(new Image("file:" + logoURL.getFile()));
 		mapLogo.setFitHeight(45);
 	    mapLogo.setFitWidth(45);

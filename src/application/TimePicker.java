@@ -61,7 +61,7 @@ public class TimePicker extends HBox {
 		slider.setBlockIncrement(120);
 		slider.setMajorTickUnit(120);
 
-		slider.setLabelFormatter(new StringConverter<>() {
+		slider.setLabelFormatter(new StringConverter<Number>() {
 			@Override
 			public Double fromString(String string) {
 				return null;

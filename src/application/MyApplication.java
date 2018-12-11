@@ -1,8 +1,5 @@
 package application;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.stream.Collectors;
 
 import database.Pwd;
 import javafx.application.Application;
