@@ -4,7 +4,7 @@
   router="FAN">  
   <class id="1" language="java" name="application.LoginPane" project="ProgMeth" 
     file="/ProgMeth/src/application/LoginPane.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="227" width="222" x="1225" y="1539"/>    
+    <position height="-1" width="-1" x="1390" y="1548"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -13,7 +13,7 @@
   </class>  
   <class id="2" language="java" name="application.SecondFl" project="ProgMeth" 
     file="/ProgMeth/src/application/SecondFl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2584" y="2101"/>    
+    <position height="-1" width="-1" x="1994" y="2491"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -22,7 +22,7 @@
   </class>  
   <class id="3" language="java" name="application.Main" project="ProgMeth" file="/ProgMeth/src/application/Main.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="119" width="124" x="2219" y="1539"/>    
+    <position height="-1" width="-1" x="2053" y="1506"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -31,7 +31,7 @@
   </class>  
   <class id="4" language="java" name="application.FirstFl" project="ProgMeth" 
     file="/ProgMeth/src/application/FirstFl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2272" y="2448"/>    
+    <position height="-1" width="-1" x="1996" y="2332"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -40,7 +40,7 @@
   </class>  
   <class id="5" language="java" name="application.ContactPane" project="ProgMeth" 
     file="/ProgMeth/src/application/ContactPane.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="83" width="110" x="1487" y="1539"/>    
+    <position height="-1" width="-1" x="1596" y="1476"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -49,7 +49,7 @@
   </class>  
   <class id="6" language="java" name="history.RightDetail" project="ProgMeth" 
     file="/ProgMeth/src/history/RightDetail.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1322" y="2405"/>    
+    <position height="-1" width="-1" x="1540" y="2669"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -58,7 +58,7 @@
   </class>  
   <class id="7" language="java" name="application.TimePicker" project="ProgMeth" 
     file="/ProgMeth/src/application/TimePicker.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2302" y="1876"/>    
+    <position height="-1" width="-1" x="2042" y="1762"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -67,7 +67,7 @@
   </class>  
   <class id="8" language="java" name="history.Records" project="ProgMeth" file="/ProgMeth/src/history/Records.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1944" y="2402"/>    
+    <position height="-1" width="-1" x="1944" y="2942"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -76,7 +76,7 @@
   </class>  
   <class id="9" language="java" name="history.ReservePane" project="ProgMeth" 
     file="/ProgMeth/src/history/ReservePane.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1575" y="2081"/>    
+    <position height="-1" width="-1" x="1535" y="2363"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -85,7 +85,7 @@
   </class>  
   <class id="10" language="java" name="application.FullMapPopup" project="ProgMeth" 
     file="/ProgMeth/src/application/FullMapPopup.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="119" width="121" x="1637" y="1539"/>    
+    <position height="-1" width="-1" x="1443" y="1746"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -94,7 +94,7 @@
   </class>  
   <interface id="11" language="java" name="application.TimeIntervalUpdate" project="ProgMeth" 
     file="/ProgMeth/src/application/TimeIntervalUpdate.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2002" y="2172"/>    
+    <position height="-1" width="-1" x="1752" y="2440"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -103,7 +103,7 @@
   </interface>  
   <class id="12" language="java" name="history.Log" project="ProgMeth" file="/ProgMeth/src/history/Log.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1602" y="2939"/>    
+    <position height="-1" width="-1" x="1650" y="3065"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -112,7 +112,7 @@
   </class>  
   <class id="13" language="java" name="application.GroupLoginInput" project="ProgMeth" 
     file="/ProgMeth/src/application/GroupLoginInput.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="371" width="217" x="1798" y="1539"/>    
+    <position height="-1" width="-1" x="1642" y="1728"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -121,7 +121,7 @@
   </class>  
   <class id="14" language="java" name="application.PositionSelector" project="ProgMeth" 
     file="/ProgMeth/src/application/PositionSelector.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2718" y="1810"/>    
+    <position height="-1" width="-1" x="2278" y="1714"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -130,7 +130,7 @@
   </class>  
   <class id="15" language="java" name="history.History" project="ProgMeth" file="/ProgMeth/src/history/History.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1578" y="2406"/>    
+    <position height="-1" width="-1" x="1760" y="2664"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -139,7 +139,7 @@
   </class>  
   <class id="16" language="java" name="application.QuietRoom" project="ProgMeth" 
     file="/ProgMeth/src/application/QuietRoom.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2578" y="2400"/>    
+    <position height="-1" width="-1" x="1994" y="2674"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -148,7 +148,7 @@
   </class>  
   <class id="17" language="java" name="application.RegionButton" project="ProgMeth" 
     file="/ProgMeth/src/application/RegionButton.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2274" y="2799"/>    
+    <position height="-1" width="-1" x="1922" y="2203"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -157,7 +157,7 @@
   </class>  
   <class id="18" language="java" name="history.HistoryLog" project="ProgMeth" 
     file="/ProgMeth/src/history/HistoryLog.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1957" y="2929"/>    
+    <position height="-1" width="-1" x="1867" y="3167"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -166,143 +166,185 @@
   </class>  
   <class id="19" language="java" name="application.ControlPane" project="ProgMeth" 
     file="/ProgMeth/src/application/ControlPane.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2717" y="1547"/>    
+    <position height="-1" width="-1" x="2253" y="1459"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="application.MyApplication" project="ProgMeth" 
-    file="/ProgMeth/src/application/MyApplication.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="119" width="124" x="2055" y="1539"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <association id="21">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="22" name="log"/>      
-      <multiplicity id="23" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="24">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="25" name="labelList"/>      
-      <multiplicity id="26" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="27">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="28" name="positionSelector"/>      
-      <multiplicity id="29" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="30">    
+  <association id="20">    
     <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="31" name="rightDetail"/>      
-      <multiplicity id="32" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="33">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="34" name="latestHistory"/>      
-      <multiplicity id="35" minimum="0" maximum="1"/>    
+      <attribute id="21" name="latestHistory">        
+        <position height="0" width="0" x="402" y="116"/>      
+      </attribute>      
+      <multiplicity id="22" minimum="0" maximum="1">        
+        <position height="0" width="0" x="402" y="116"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="36">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="37" name="currentLog"/>      
-      <multiplicity id="38" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="39">    
-    <bendpoint x="1324" y="2788"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="40" name="log"/>      
-      <multiplicity id="41" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="42">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="11"/>  
-  </realization>  
-  <association id="43">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="44" name="reservePane"/>      
-      <multiplicity id="45" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="46">    
+  <association id="23">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="47" name="ctrlPane"/>      
-      <multiplicity id="48" minimum="0" maximum="1"/>    
+      <attribute id="24" name="positionSelector">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="25" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="19" navigable="true"/>    
+    <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="49">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="11"/>  
-  </realization>  
-  <realization id="50">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="11"/>  
-  </realization>  
-  <association id="51">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="52" name="currentLog"/>      
-      <multiplicity id="53" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="54">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="55" name="timePicker"/>      
-      <multiplicity id="56" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="57">    
+  <realization id="26">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="11"/>  
   </realization>  
-  <association id="58">    
+  <association id="27">    
     <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="59" name="recordsPane"/>      
-      <multiplicity id="60" minimum="0" maximum="1"/>    
+      <attribute id="28" name="currentLog">        
+        <position height="0" width="0" x="652" y="-128"/>      
+      </attribute>      
+      <multiplicity id="29" minimum="0" maximum="1">        
+        <position height="0" width="0" x="652" y="-128"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="30">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="31" name="recordsPane">        
+        <position height="0" width="0" x="266" y="-196"/>      
+      </attribute>      
+      <multiplicity id="32" minimum="0" maximum="1">        
+        <position height="0" width="0" x="266" y="-196"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="61">    
+  <association id="33">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="34" name="currentLog">        
+        <position height="0" width="0" x="652" y="-128"/>      
+      </attribute>      
+      <multiplicity id="35" minimum="0" maximum="1">        
+        <position height="0" width="0" x="652" y="-128"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="36">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="37">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="38" name="reservePane">        
+        <position height="0" width="0" x="182" y="78"/>      
+      </attribute>      
+      <multiplicity id="39" minimum="0" maximum="1">        
+        <position height="0" width="0" x="182" y="78"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="40">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="11"/>  
   </realization>  
-  <association id="62">    
+  <association id="41">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="42" name="log">        
+        <position height="0" width="0" x="652" y="-128"/>      
+      </attribute>      
+      <multiplicity id="43" minimum="0" maximum="1">        
+        <position height="0" width="0" x="652" y="-128"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="45" name="rightDetail">        
+        <position height="0" width="0" x="334" y="-280"/>      
+      </attribute>      
+      <multiplicity id="46" minimum="0" maximum="1">        
+        <position height="0" width="0" x="334" y="-280"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="47">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="48">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="49" name="log">        
+        <position height="0" width="0" x="652" y="-128"/>      
+      </attribute>      
+      <multiplicity id="50" minimum="0" maximum="1">        
+        <position height="0" width="0" x="652" y="-128"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="52" name="timePicker">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="53" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="55" name="ctrlPane">        
+        <position height="0" width="0" x="-60" y="12"/>      
+      </attribute>      
+      <multiplicity id="56" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-60" y="12"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="58" name="labelList">        
+        <position height="0" width="0" x="28" y="226"/>      
+      </attribute>      
+      <multiplicity id="59" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="28" y="226"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="60">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="61">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="63" name="btns"/>      
-      <multiplicity id="64" minimum="0" maximum="2147483647"/>    
+      <attribute id="62" name="btns">        
+        <position height="0" width="0" x="-324" y="-824"/>      
+      </attribute>      
+      <multiplicity id="63" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-324" y="-824"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="17" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  

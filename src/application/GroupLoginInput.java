@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import database.Pwd;
 import database.Store;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -85,7 +86,7 @@ public abstract class GroupLoginInput {
 		pane.add(submit, 2, 4);
 
 		Scene scene = new Scene(pane);
-		scene.getStylesheets().add(this.getClass().getResourceAsStream("/application/style.css").toString());
+		scene.getStylesheets().add("file:" + Pwd.root() + "/application/style.css");
 
 		stage.setScene(scene);
 		stage.show();
