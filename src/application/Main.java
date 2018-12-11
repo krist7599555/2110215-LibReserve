@@ -14,6 +14,9 @@ import javafx.stage.Stage;
  * 	1.) left  - PositionSelector
  *  2.) right - ControlPane
  */
+
+// VM args
+// --add-exports=javafx.controls/com.sun.javafx.scene.control.inputmap=ALL-UNNAMED
 public class Main extends Application {
 
 	PositionSelector positionSelector;
