@@ -14,7 +14,6 @@ Reserving table in Enginner Libraly is quite hard. So, our team think that is wo
 
 ### Preview
 
-![img003]
 ![img004]
 ![img005]
 ![img006]
